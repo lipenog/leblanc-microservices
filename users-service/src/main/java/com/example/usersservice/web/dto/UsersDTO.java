@@ -19,7 +19,7 @@ public class UsersDTO {
     @NotBlank @NotNull @Pattern(regexp = "([a-zA-Z0-9]|-|_|)*")
     @Size(min = 5, max = 50)
     private String identifier;
-    @NotBlank @NotNull @Pattern(regexp = "([a-zA-Z0-9]|-|_|)*")
+    @NotBlank @NotNull @Pattern(regexp = "([a-zA-Z0-9]|-|_|\\s|)*")
     @Size(min = 3, max = 50)
     private String name;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
