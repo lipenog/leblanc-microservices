@@ -16,7 +16,7 @@ public class Users {
     @Id
     @Column(columnDefinition = "serial")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String identifier;
     private String name;
     private String password;
