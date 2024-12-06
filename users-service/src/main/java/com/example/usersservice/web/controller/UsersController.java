@@ -1,5 +1,6 @@
 package com.example.usersservice.web.controller;
 
+import com.example.usersservice.exception.InvalidUsersDtoException;
 import com.example.usersservice.web.dto.UsersDTO;
 import com.example.usersservice.web.service.UsersService;
 import com.example.usersservice.web.utils.DtoValidator;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 @RestController
 public class UsersController {
@@ -20,8 +22,13 @@ public class UsersController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<UsersDTO> createUser(@RequestBody UsersDTO usersDTO) {
-        DtoValidator.validateDto(usersDTO).forEach(i -> System.out.println(i));
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<UsersDTO> createUser(@RequestBody UsersDTO usersDTO) throws InvalidUsersDtoException {
+        // validates user dto
+        List<String> violations = DtoValidator.validateDto(usersDTO);
+        if(!violations.isEmpty()) throw new InvalidUsersDtoException(violations);
+
+        // creates user
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

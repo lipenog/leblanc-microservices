@@ -23,6 +23,7 @@ public class UsersDTO {
     @Size(min = 3, max = 50)
     private String name;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Pattern(regexp = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}")
     private String password;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDate creation;
