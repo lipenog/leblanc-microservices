@@ -2,10 +2,12 @@ package com.example.usersservice.web.controller;
 
 import com.example.usersservice.exception.InvalidUsersDtoException;
 import com.example.usersservice.web.dto.UsersDTO;
+import com.example.usersservice.web.dto.UsersPageDTO;
 import com.example.usersservice.web.entity.Users;
 import com.example.usersservice.web.service.UsersService;
 import com.example.usersservice.web.utils.DtoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,8 +41,9 @@ public class UsersController {
         return optionalUsers.map(users -> ResponseEntity.ok(new UsersDTO(users))).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     @GetMapping("/users")
-    public ResponseEntity<UsersDTO> searchUsers(){
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<UsersPageDTO> searchUsers(@RequestParam(name = "content") String content, @RequestParam(name = "page") Integer page){
+        Page<Users> usersPage = usersService.searchUsers(content, page);
+        return ResponseEntity.ok(new UsersPageDTO(usersPage));
     }
     @PutMapping("/users")
     public ResponseEntity<UsersDTO> updateUser(@RequestBody UsersDTO usersDTO) throws InvalidUsersDtoException {
