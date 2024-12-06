@@ -75,7 +75,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        
+
         <!-- SWAGGER -->
         <dependency>
             <groupId>org.springdoc</groupId>
