@@ -3,7 +3,6 @@ package com.example.usersservice.security;
 import com.example.usersservice.web.entity.Users;
 import com.example.usersservice.web.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

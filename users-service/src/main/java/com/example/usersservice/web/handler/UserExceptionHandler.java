@@ -2,7 +2,6 @@ package com.example.usersservice.web.handler;
 
 import com.example.usersservice.exception.DuplicateKeyException;
 import com.example.usersservice.exception.InvalidUsersDtoException;
-import feign.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
