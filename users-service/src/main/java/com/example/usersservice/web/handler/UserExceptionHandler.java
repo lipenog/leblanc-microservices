@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class UserExceptionHandler {
     @ExceptionHandler(InvalidUsersDtoException.class)
     public ResponseEntity<String> handle(InvalidUsersDtoException ex){
-        return new ResponseEntity<>(ex.getViolations().stream().reduce("", (s1, s2) -> s1 + " | " + s2), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(ex.getViolations().stream().reduce("", (s1, s2) -> s1 + "\n" + s2).trim(), HttpStatus.BAD_REQUEST);
     }
 
 }

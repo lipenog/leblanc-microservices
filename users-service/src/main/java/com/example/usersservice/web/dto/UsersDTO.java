@@ -16,14 +16,14 @@ import java.time.LocalDate;
 public class UsersDTO {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
-    @NotBlank @NotNull @Pattern(regexp = "([a-zA-Z0-9]|-|_|)*")
-    @Size(min = 5, max = 50)
+    @NotBlank(message = "The identifier must be valid") @NotNull(message = "The identifier must be valid") @Pattern(regexp = "([a-zA-Z0-9]|-|_|)*", message = "The identifier must be valid")
+    @Size(min = 5, max = 50, message = "The identifier must be valid")
     private String identifier;
-    @NotBlank @NotNull @Pattern(regexp = "([a-zA-Z0-9]|-|_|\\s|)*")
-    @Size(min = 3, max = 50)
+    @NotBlank(message = "The name must be valid") @NotNull(message = "The name must be valid") @Pattern(regexp = "([a-zA-Z0-9]|-|_|\\s|)*", message = "The name must be valid")
+    @Size(min = 3, max = 50, message = "The name must be valid")
     private String name;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Pattern(regexp = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}")
+    @Pattern(regexp = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}", message = "The password must be valid")
     private String password;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDate creation;
