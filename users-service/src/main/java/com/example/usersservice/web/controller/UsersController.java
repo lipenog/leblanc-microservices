@@ -2,6 +2,7 @@ package com.example.usersservice.web.controller;
 
 import com.example.usersservice.exception.InvalidUsersDtoException;
 import com.example.usersservice.web.dto.UsersDTO;
+import com.example.usersservice.web.entity.Users;
 import com.example.usersservice.web.service.UsersService;
 import com.example.usersservice.web.utils.DtoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class UsersController {
         if(!violations.isEmpty()) throw new InvalidUsersDtoException(violations);
 
         // creates user
-
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        Users users = usersService.createUser(usersDTO);
+        return new ResponseEntity<>(new UsersDTO(users), HttpStatus.CREATED);
     }
 }

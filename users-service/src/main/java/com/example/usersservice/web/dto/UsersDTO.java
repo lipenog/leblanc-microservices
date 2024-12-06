@@ -1,5 +1,6 @@
 package com.example.usersservice.web.dto;
 
+import com.example.usersservice.web.entity.Users;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -27,4 +28,11 @@ public class UsersDTO {
     private String password;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDate creation;
+
+    public UsersDTO(Users users){
+        this.id = users.getId();
+        this.name = users.getName();
+        this.identifier = users.getIdentifier();
+        this.creation = users.getCreation();
+    }
 }
