@@ -23,7 +23,7 @@ public class UsersController {
         this.usersService = usersService;
     }
 
-    @PostMapping("/users")
+    @PostMapping("/register")
     public ResponseEntity<UsersDTO> createUser(@RequestBody UsersDTO usersDTO) throws InvalidUsersDtoException {
         // validates user dto
         List<String> violations = DtoValidator.validateDto(usersDTO);

@@ -4,8 +4,8 @@ import com.example.usersservice.exception.DuplicateKeyException;
 import com.example.usersservice.web.dto.UsersDTO;
 import com.example.usersservice.web.entity.Users;
 import com.example.usersservice.web.repository.UsersRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,10 +13,12 @@ import java.util.Optional;
 @Service
 public class UsersService {
     private final UsersRepository usersRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UsersService(UsersRepository usersRepository) {
+    public UsersService(UsersRepository usersRepository, PasswordEncoder passwordEncoder) {
         this.usersRepository = usersRepository;
+        this.passwordEncoder = passwordEncoder;
     }
     public Optional<Users> getById(Long id){
         return usersRepository.findById(id);
@@ -29,7 +31,7 @@ public class UsersService {
 
         Users users = Users.builder()
                 .name(usersDTO.getName())
-                .password(usersDTO.getPassword())
+                .password(passwordEncoder.encode(usersDTO.getPassword()))
                 .identifier(usersDTO.getIdentifier())
                 .build();
         return usersRepository.save(users);
