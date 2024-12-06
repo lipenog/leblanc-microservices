@@ -36,4 +36,15 @@ public class UsersService {
                 .build();
         return usersRepository.save(users);
     }
+
+    public Users updateUser(UsersDTO usersDTO, Users original) {
+        Users users = Users.builder()
+                .id(original.getId())
+                .name(usersDTO.getName())
+                .identifier(original.getIdentifier())
+                .creation(original.getCreation())
+                .password(original.getPassword())
+                .build();
+        return usersRepository.save(users);
+    }
 }

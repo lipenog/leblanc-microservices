@@ -8,6 +8,7 @@ import com.example.usersservice.web.utils.DtoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,7 +43,16 @@ public class UsersController {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
     @PutMapping("/users")
-    public ResponseEntity<UsersDTO> updateUser(){
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<UsersDTO> updateUser(@RequestBody UsersDTO usersDTO) throws InvalidUsersDtoException {
+        // verify dto
+        List<String> violations = DtoValidator.validateDto(usersDTO);
+        if(!violations.isEmpty()) throw new InvalidUsersDtoException(violations);
+        // search logged user
+        String identifier = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<Users> usersOptional = usersService.getByIdentifier(identifier);
+        if(usersOptional.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        // update data
+        Users response = usersService.updateUser(usersDTO, usersOptional.get());
+        return ResponseEntity.ok(new UsersDTO(response));
     }
 }
