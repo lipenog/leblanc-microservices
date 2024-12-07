@@ -1,0 +1,34 @@
+server:
+  port: 9000
+
+security:
+  jwt:
+    header: "Authorization"
+    key: jxgEQeXA28P32q8AVdbyk1ASDANdu8553YUn4
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/post-service
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    locations: classpath:db/migration
+    default-schema: public
+    baseline-on-migrate: true
+  application:
+    name: post-service
+
+
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+      flywaydb: DEBUG
