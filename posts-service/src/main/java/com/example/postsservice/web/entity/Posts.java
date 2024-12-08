@@ -2,7 +2,10 @@ package com.example.postsservice.web.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.cglib.core.Local;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Set;
 
 @Entity
@@ -20,8 +23,13 @@ public class Posts {
     private String content;
     @OneToMany(mappedBy = "posts", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Media> mediaSet;
-    @PrePersist @PreUpdate
-    private void setParent(){
+    @Column(name = "user_id")
+    private Long userId;
+    @Column(name = "published_at")
+    private LocalDateTime publishedAt;
+    @PrePersist
+    private void prePersist(){
+        this.publishedAt = LocalDateTime.now(ZoneId.of("UTC"));
         this.mediaSet.forEach(m -> m.setPosts(this));
     }
 }
