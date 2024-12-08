@@ -1,6 +1,8 @@
 package com.example.postsservice.security;
 
 import com.example.postsservice.security.filters.JWTValidatorFilter;
+import feign.RequestInterceptor;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Configuration
 public class FilterChainSecurityConfig {
@@ -34,5 +38,16 @@ public class FilterChainSecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults())
                 .build();
+    }
+    @Bean
+    public RequestInterceptor requestInterceptor() {
+        return template -> {
+            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            HttpServletRequest request = attributes.getRequest();
+            String authorizationHeader = request.getHeader("Authorization");
+            if (authorizationHeader != null) {
+                template.header("Authorization", authorizationHeader);
+            }
+        };
     }
 }
