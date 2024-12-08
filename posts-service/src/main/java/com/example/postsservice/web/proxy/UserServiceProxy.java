@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.Optional;
 @FeignClient(name = "user-service")
 public interface UserServiceProxy {
-    @GetMapping("/users/identifier/{id}")
+    @GetMapping("/users/identifier/{identifier}")
     UsersDTO getUserByIdentifier(@PathVariable String identifier);
 }
