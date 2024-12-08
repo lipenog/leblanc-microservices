@@ -1,7 +1,9 @@
 package com.example.postsservice.web.dto;
 
-import java.time.LocalDate;
+import lombok.Getter;
 
+import java.time.LocalDate;
+@Getter
 public class UsersDTO {
     private Long id;
     private String identifier;
