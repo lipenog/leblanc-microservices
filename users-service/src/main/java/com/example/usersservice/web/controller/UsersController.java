@@ -35,7 +35,7 @@ public class UsersController {
         Users users = usersService.createUser(usersDTO);
         return new ResponseEntity<>(new UsersDTO(users), HttpStatus.CREATED);
     }
-    @GetMapping("/users/identifier/{id}")
+    @GetMapping("/users/identifier/{identifier}")
     public ResponseEntity<UsersDTO> getUserByIdentifier(@PathVariable String identifier){
         Optional<Users> optionalUsers = usersService.getByIdentifier(identifier);
         return optionalUsers.map(users -> ResponseEntity.ok(new UsersDTO(users))).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
