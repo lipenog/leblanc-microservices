@@ -20,4 +20,8 @@ public class Posts {
     private String content;
     @OneToMany(mappedBy = "posts", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Media> mediaSet;
+    @PrePersist @PreUpdate
+    private void setParent(){
+        this.mediaSet.forEach(m -> m.setPosts(this));
+    }
 }

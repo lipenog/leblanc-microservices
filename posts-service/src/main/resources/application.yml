@@ -1,6 +1,9 @@
 server:
   port: 9000
 
+constants:
+  media-path: /home/lipe/test/media/
+
 security:
   jwt:
     header: "Authorization"
@@ -18,6 +21,11 @@ spring:
     baseline-on-migrate: true
   application:
     name: post-service
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
 
 
 logging:
