@@ -35,7 +35,7 @@ public class FilterChainSecurityConfig {
                 .addFilterAfter(new JWTGeneratorFilter(JWT_HEADER, JWT_KEY), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/register").permitAll()
-                        .requestMatchers("/users", "/users/**", "/users/identifier/**").authenticated()
+                        .requestMatchers("/users", "/users/**").authenticated()
                         .requestMatchers("/credentials").authenticated()
                 )
                 .formLogin(Customizer.withDefaults())

@@ -1,9 +1,8 @@
-package com.example.usersservice.security;
+package com.example.postsservice.security;
 
-import com.example.usersservice.security.filters.JWTGeneratorFilter;
-import com.example.usersservice.security.filters.JWTRefreshTokenFilter;
-import com.example.usersservice.security.filters.JWTValidatorFilter;
-import com.example.usersservice.security.filters.LoginDetailsValidationFilter;
+import com.example.postsservice.security.filters.JWTValidatorFilter;
+import feign.RequestInterceptor;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Configuration
 public class FilterChainSecurityConfig {
@@ -29,14 +30,9 @@ public class FilterChainSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .cors(cors -> cors.configurationSource(new CorsConfig()))
                 .csrf(AbstractHttpConfigurer::disable)
-                .addFilterBefore(new LoginDetailsValidationFilter(), BasicAuthenticationFilter.class)
                 .addFilterBefore(new JWTValidatorFilter(JWT_HEADER, JWT_KEY), BasicAuthenticationFilter.class)
-                .addFilterBefore(new JWTRefreshTokenFilter(JWT_HEADER, JWT_KEY), JWTValidatorFilter.class)
-                .addFilterAfter(new JWTGeneratorFilter(JWT_HEADER, JWT_KEY), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/register").permitAll()
-                        .requestMatchers("/users", "/users/**", "/users/identifier/**").authenticated()
-                        .requestMatchers("/credentials").authenticated()
+                        .requestMatchers("/posts").authenticated()
                 )
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults())
@@ -44,7 +40,14 @@ public class FilterChainSecurityConfig {
                 .build();
     }
     @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public RequestInterceptor requestInterceptor() {
+        return template -> {
+            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            HttpServletRequest request = attributes.getRequest();
+            String authorizationHeader = request.getHeader("Authorization");
+            if (authorizationHeader != null) {
+                template.header("Authorization", authorizationHeader);
+            }
+        };
     }
 }
