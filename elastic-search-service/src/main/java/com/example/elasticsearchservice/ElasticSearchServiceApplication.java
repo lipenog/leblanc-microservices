@@ -18,13 +18,13 @@ public class ElasticSearchServiceApplication {
 
     @PostConstruct
     public void test() {
-        String path = "/home/lipe/Downloads/Download.mp4";
+        String path = "./Download.mp4";
         processVideoFile(path);
     }
 
     public String convertVideoToMP3(String originalPath){
         try {
-            String outputPath = "/home/lipe/test/audio/" + UUID.randomUUID() + ".mp3";
+            String outputPath = "./Download.mp3";
             ProcessBuilder pb = new ProcessBuilder("ffmpeg", "-i", originalPath, outputPath);
             Process process = pb.start();
             process.waitFor();
@@ -35,7 +35,7 @@ public class ElasticSearchServiceApplication {
     }
     public String convertAudioToText(String audioPath){
         try {
-            ProcessBuilder pb = new ProcessBuilder("/home/lipe/Documents/python-venv/bin/python3", "/home/lipe/Documents/leblanc/voice-to-text/main.py", audioPath);
+            ProcessBuilder pb = new ProcessBuilder("/app/venv/bin/python3", "./main.py", audioPath);
             Process process = pb.start();
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             StringBuilder result = new StringBuilder();
