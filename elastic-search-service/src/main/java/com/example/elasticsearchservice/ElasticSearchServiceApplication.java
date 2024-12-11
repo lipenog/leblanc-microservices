@@ -1,8 +1,10 @@
 package com.example.elasticsearchservice;
 
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,8 +12,10 @@ import java.io.InputStreamReader;
 import java.util.UUID;
 
 @SpringBootApplication
+@EnableElasticsearchRepositories
 public class ElasticSearchServiceApplication {
-
+    @Autowired
+    public ElasticRepository elasticRepository;
     public static void main(String[] args) {
         SpringApplication.run(ElasticSearchServiceApplication.class, args);
     }
@@ -19,7 +23,12 @@ public class ElasticSearchServiceApplication {
     @PostConstruct
     public void test() {
         String path = "./Download.mp4";
-        processVideoFile(path);
+//        String result = processVideoFile(path);
+        Posts posts = elasticRepository.save(new Posts(UUID.randomUUID().toString(), "Teste de video", "result"));
+        System.out.println(posts);
+
+        System.out.println("POTS: ");
+        elasticRepository.findAll().forEach(System.out::println);
     }
 
     public String convertVideoToMP3(String originalPath){
@@ -50,9 +59,8 @@ public class ElasticSearchServiceApplication {
             throw new RuntimeException(e);
         }
     }
-    public void processVideoFile(String videoPath) {
+    public String processVideoFile(String videoPath) {
         String audioPath = convertVideoToMP3(videoPath);
-        String text = convertAudioToText(audioPath);
-        System.out.println(text);
+        return convertAudioToText(audioPath);
     }
 }
