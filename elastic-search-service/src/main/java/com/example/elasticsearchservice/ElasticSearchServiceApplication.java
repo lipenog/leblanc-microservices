@@ -23,8 +23,8 @@ public class ElasticSearchServiceApplication {
     @PostConstruct
     public void test() {
         String path = "./Download.mp4";
-//        String result = processVideoFile(path);
-        Posts posts = elasticRepository.save(new Posts(UUID.randomUUID().toString(), "Teste de video", "result"));
+        String result = processVideoFile(path);
+        Posts posts = elasticRepository.save(new Posts(UUID.randomUUID().toString(), "Teste de video", result));
         System.out.println(posts);
 
         System.out.println("POTS: ");

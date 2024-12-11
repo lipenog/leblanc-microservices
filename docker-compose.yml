@@ -1,6 +1,4 @@
-version: '3.7'
 services:
-
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.16.1
     ports:
@@ -11,8 +9,13 @@ services:
       xpack.security.enabled: "true"
       xpack.security.http.ssl.enabled: "false"
       ELASTIC_PASSWORD: "elastic" 
+    healthcheck:
+      test: curl -u elastic:elastic http://elasticsearch:9200
+      interval: 30s
+      retries: 5
+      start_period: 30s
     volumes:
-      - ./esdata:/var/lib/elasticsearch/data
+      - ./esdata:/usr/share/elasticsearch/data
   kibana:
     image: docker.elastic.co/kibana/kibana:8.16.1
     ports:
@@ -22,7 +25,18 @@ services:
       ELASTICSEARCH_USERNAME: "user123"
       ELASTICSEARCH_PASSWORD: "elastic"
     depends_on:
-      - elasticsearch
+      elasticsearch:
+        condition: service_healthy
+  elastic-search-service:
+    build: ./elastic-search-service
+    ports: 
+      - "8000:8000"
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    environment:
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+      
 volumes:
   esdata:
     driver: local

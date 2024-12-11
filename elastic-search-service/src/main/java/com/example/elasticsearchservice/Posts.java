@@ -6,7 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-@Document(indexName = "posts", createIndex = false)
+@Document(indexName = "posts")
 @NoArgsConstructor @AllArgsConstructor
 @Getter @Setter
 @ToString
