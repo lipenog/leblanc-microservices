@@ -8,7 +8,6 @@ COPY mvnw ./
 COPY .mvn ./.mvn
 
 COPY main.py /app/main.py
-COPY Download.mp4 /app/Download.mp4
 
 RUN chmod +x mvnw
 RUN sed -i 's/\r$//' mvnw
@@ -29,7 +28,6 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
 COPY main.py /app/main.py
-COPY Download.mp4 /app/Download.mp4
 
 EXPOSE 8000
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
