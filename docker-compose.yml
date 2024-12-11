@@ -1,0 +1,90 @@
+services:
+
+  db:
+    image: postgres:17.0
+    restart: always
+    ports:
+      - '10734:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres"  ]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.16.1
+    ports:
+      - "9200:9200"
+    environment:
+      discovery.type: "single-node"
+      ES_JAVA_OPTS: "-Xms2g -Xmx2g"
+      xpack.security.enabled: "true"
+      xpack.security.http.ssl.enabled: "false"
+      ELASTIC_PASSWORD: "elastic" 
+    healthcheck:
+      test: curl -u elastic:elastic http://elasticsearch:9200
+      interval: 30s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - ./esdata:/usr/share/elasticsearch/data
+   
+  elastic-search-service:
+    build: ./elastic-search-service
+    ports: 
+      - "8000:8000"
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    environment:
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+
+  posts-service:
+    build: ./posts-service
+    ports:
+      - "9000:9000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/post-service
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://naming-service:8761/eureka
+    volumes:
+      - ./data/media:/data/media/
+  
+  users-service:
+    build: ./users-service
+    ports:
+      - "9090:9090"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/user-service
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://naming-service:8761/eureka
+
+  naming-service:
+    build: ./naming-service
+    ports:
+      - "8761:8761"
+  
+  api-gateway:
+    build: ./gateway-service
+    ports:
+      - "8765:8765"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://naming-service:8761/eureka
+
+volumes:
+  esdata:
+    driver: local
+  db:
+    driver: local
+  data:
+    driver: local

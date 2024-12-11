@@ -1,0 +1,14 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: elastic-search-service
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+  elasticsearch:
+    uris: http://127.0.0.1:9200
+    username: elastic
+    password: elastic
