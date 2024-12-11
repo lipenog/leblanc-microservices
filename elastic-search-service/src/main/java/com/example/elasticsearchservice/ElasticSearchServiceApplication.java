@@ -19,8 +19,7 @@ public class ElasticSearchServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(ElasticSearchServiceApplication.class, args);
     }
-
-    @PostConstruct
+    
     public void test() {
         String path = "./Download.mp4";
         String result = processVideoFile(path);
