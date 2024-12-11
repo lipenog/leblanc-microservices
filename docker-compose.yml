@@ -73,6 +73,13 @@ services:
     build: ./naming-service
     ports:
       - "8761:8761"
+  
+  api-gateway:
+    build: ./gateway-service
+    ports:
+      - "8765:8765"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://naming-service:8761/eureka
 
 volumes:
   esdata:
