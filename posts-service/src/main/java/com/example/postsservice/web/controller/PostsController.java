@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,7 +32,7 @@ public class PostsController {
         this.postsService = postsService;
     }
 
-    @GetMapping("/posts")
+    @PostMapping("/posts")
     public ResponseEntity<PostsDTO> createPost(@RequestPart String content, @RequestPart List<MultipartFile> media) throws IOException {
         String loggedUserIdentifier = SecurityContextHolder.getContext().getAuthentication().getName();
         Posts posts = postsService.createPosts(loggedUserIdentifier, content, media);
