@@ -4,7 +4,7 @@ import whisper
 def transcribe_audio(file_path):
     model = whisper.load_model("base")
     result = model.transcribe(file_path)
-    print("@RESULT: " + result["text"])
+    print(result["text"])
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
