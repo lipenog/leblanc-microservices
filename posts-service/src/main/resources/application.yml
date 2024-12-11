@@ -2,7 +2,12 @@ server:
   port: 9000
 
 constants:
-  media-path: /home/lipe/test/media/
+  media-path: /data/media/
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
 
 security:
   jwt:

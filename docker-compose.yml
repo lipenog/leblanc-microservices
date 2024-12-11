@@ -44,9 +44,29 @@ services:
         condition: service_healthy
     environment:
       - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
-      
+
+  posts-service:
+    build: ./posts-service
+    ports:
+      - "9000:9000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/post-service
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://naming-service:8761/eureka
+    volumes:
+      - ./data/media:/data/media/
+  
+  naming-service:
+    build: ./naming-service
+    ports:
+      - "8761:8761"
+
 volumes:
   esdata:
     driver: local
   db:
+    driver: local
+  data:
     driver: local
