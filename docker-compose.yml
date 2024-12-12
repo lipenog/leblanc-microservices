@@ -23,7 +23,7 @@ services:
       - "9200:9200"
     environment:
       discovery.type: "single-node"
-      ES_JAVA_OPTS: "-Xms2g -Xmx2g"
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
       xpack.security.enabled: "true"
       xpack.security.http.ssl.enabled: "false"
       ELASTIC_PASSWORD: "elastic" 
