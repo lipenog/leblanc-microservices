@@ -3,6 +3,7 @@ server:
 
 constants:
   media-path: /data/media/
+  posts-topic: posts-topic
 
 eureka:
   client:
