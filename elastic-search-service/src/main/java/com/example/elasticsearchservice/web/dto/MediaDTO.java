@@ -1,4 +1,4 @@
-package com.example.elasticsearchservice;
+package com.example.elasticsearchservice.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

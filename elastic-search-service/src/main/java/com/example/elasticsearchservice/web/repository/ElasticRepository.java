@@ -1,9 +1,8 @@
-package com.example.elasticsearchservice;
+package com.example.elasticsearchservice.web.repository;
 
 
-import org.springframework.data.elasticsearch.annotations.Query;
+import com.example.elasticsearchservice.web.entity.Posts;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
-import org.springframework.data.repository.Repository;
 
 public interface ElasticRepository extends ElasticsearchRepository<Posts, String> {
 }
