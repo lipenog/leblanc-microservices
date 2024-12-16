@@ -1,9 +1,11 @@
 package com.example.elasticsearchservice;
 
+import com.example.elasticsearchservice.web.dto.PostsDTO;
+import com.example.elasticsearchservice.web.entity.Posts;
+import com.example.elasticsearchservice.web.repository.ElasticRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
