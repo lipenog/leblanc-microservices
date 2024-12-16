@@ -67,8 +67,12 @@ services:
     depends_on:
       elasticsearch:
         condition: service_healthy
+      kafka:
+        condition: service_healthy
     environment:
       - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+       
 
   posts-service:
     build: ./posts-service

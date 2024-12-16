@@ -40,9 +40,7 @@ public class PostsService {
                 .content(content)
                 .mediaSet(media.stream().map(this::createMedia).collect(Collectors.toSet()))
                 .build();
-        Posts persistedPost = postsRepository.save(posts);
-        postsTopicService.produceToPostsTopic(persistedPost);
-        return persistedPost;
+        return postsRepository.save(posts);
     }
 
     private Media createMedia(MultipartFile media){
