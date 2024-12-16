@@ -21,13 +21,15 @@ import java.util.stream.Collectors;
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
+    private final PostsTopicService postsTopicService;
     private final UserServiceProxy userServiceProxy;
     @Value(value = "${constants.media-path}")
     private String mediaPath;
 
     @Autowired
-    public PostsService(PostsRepository postsRepository, UserServiceProxy userServiceProxy) {
+    public PostsService(PostsRepository postsRepository, PostsTopicService postsTopicService, UserServiceProxy userServiceProxy) {
         this.postsRepository = postsRepository;
+        this.postsTopicService = postsTopicService;
         this.userServiceProxy = userServiceProxy;
     }
 

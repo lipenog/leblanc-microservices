@@ -3,6 +3,7 @@ server:
 
 constants:
   media-path: /data/media/
+  posts-topic: posts-topic
 
 eureka:
   client:
@@ -31,7 +32,13 @@ spring:
       enabled: true
       max-file-size: 20MB
       max-request-size: 20MB
-
+  kafka:
+    admin:
+      auto-create: true
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 logging:
   level:

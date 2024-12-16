@@ -2,6 +2,10 @@ server:
   port: 8000
 
 spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      value-deserializer:
   application:
     name: elastic-search-service
   data:
