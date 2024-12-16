@@ -7,3 +7,4 @@
 | Notification Service | 8080 |
 | Search Service | 8000 |
 | Logs Service | 9999 |
+| Kafka KRaft | 9092 |
