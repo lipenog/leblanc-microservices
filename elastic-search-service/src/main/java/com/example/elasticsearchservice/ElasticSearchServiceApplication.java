@@ -1,10 +1,14 @@
 package com.example.elasticsearchservice;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+import org.springframework.kafka.annotation.KafkaListener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,7 +23,15 @@ public class ElasticSearchServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(ElasticSearchServiceApplication.class, args);
     }
-    
+    @KafkaListener(topics = "posts-topic", groupId = "group-id")
+    public void consume(String post) throws JsonProcessingException {
+        System.out.println(post);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        PostsDTO postsDTO = objectMapper.readValue(post, PostsDTO.class);
+        System.out.println(postsDTO.getUserId());
+    }
+
     public void test() {
         String path = "./Download.mp4";
         String result = processVideoFile(path);
