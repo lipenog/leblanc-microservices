@@ -60,9 +60,10 @@ public class PostsService {
         // filters only mp4 files path
         List<String> postMP4FilesPath = postsDTO.getMedia()
                 .stream()
-                .filter(mediaDTO -> !mediaDTO.getMediaType().equals(".mp4"))
+                .filter(mediaDTO -> mediaDTO.getMediaType().equals(".mp4"))
                 .map(MediaDTO::getMediaPath)
                 .toList();
+        postMP4FilesPath.forEach(System.out::println);
         // appends every media
         StringBuilder mediaContent = new StringBuilder();
         postMP4FilesPath.forEach(mp4FilePath -> {

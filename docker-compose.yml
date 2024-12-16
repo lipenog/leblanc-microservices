@@ -58,7 +58,7 @@ services:
       retries: 5
       start_period: 30s
     volumes:
-      - ./esdata:/usr/share/elasticsearch/data
+      - esdata:/usr/share/elasticsearch/data
    
   elastic-search-service:
     build: ./elastic-search-service
@@ -72,8 +72,10 @@ services:
     environment:
       - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    volumes:
+      - ./data/media:/data/media/
+      - ./data/audio:/data/audio/
        
-
   posts-service:
     build: ./posts-service
     ports:
