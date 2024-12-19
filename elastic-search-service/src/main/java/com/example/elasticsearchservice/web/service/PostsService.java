@@ -56,6 +56,12 @@ public class PostsService {
         return convertAudioToText(audioPath);
     }
 
+    public List<Posts> searchPosts(String content){
+        // TODO add tags treat.
+        return elasticRepository.getPostsBySearch(content, "");
+    }
+
+
     public void persistPost(PostsDTO postsDTO) {
         // filters only mp4 files path
         List<String> postMP4FilesPath = postsDTO.getMedia()
