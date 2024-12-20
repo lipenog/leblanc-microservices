@@ -5,6 +5,8 @@ import com.example.elasticsearchservice.web.dto.PostsDTO;
 import com.example.elasticsearchservice.web.entity.Posts;
 import com.example.elasticsearchservice.web.repository.ElasticRepository;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.elasticsearch.client.elc.NativeQuery;
+import org.springframework.data.elasticsearch.client.elc.NativeQueryBuilder;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.Query;
@@ -14,8 +16,14 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Set;
 import java.util.UUID;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
 @Service
 public class PostsService {
     @Value("${constants.audio-path}")
@@ -61,22 +69,38 @@ public class PostsService {
         return convertAudioToText(audioPath);
     }
 
+    private HashMap<String, Set<String>> treatQuery(String query) {
+        HashMap<String, Set<String>> treatedQuery = new HashMap<>();
+        // extract #(.*) and "(.*)" for exact match
+
+        // extract the tags
+        Pattern pattern = Pattern.compile("#(\\S*)", Pattern.DOTALL);
+        Matcher matcher = pattern.matcher(query);
+        Set<String> tags = matcher.results().map(result -> result.group(1)).collect(Collectors.toSet());
+        // remove tags from query
+        query = matcher.replaceAll("");
+
+        // extract match phrases
+        pattern = Pattern.compile("\\Q\"\\E(.*?)\\Q\"\\E",  Pattern.DOTALL);
+        matcher = pattern.matcher(query);
+        Set<String> matchPhrases = matcher.results().map(result -> result.group(1)).collect(Collectors.toSet());
+        // remove match phrases from query
+        query = matcher.replaceAll("");
+
+        // add treated query elements
+        treatedQuery.put("match", Set.of(query));
+        treatedQuery.put("tags", tags);
+        treatedQuery.put("phrases", matchPhrases);
+
+        return treatedQuery;
+    }
+
     public SearchHits<Posts> searchPosts(String content){
-        Query query = new StringQuery("""
-                                      {
-                                        "bool": {
-                                          "must": [
-                                            {
-                                              "match": {
-                                                "content": "senhor"
-                                              }
-                                            }
-                                          ]
-                                        }
-                                      }
-                                    """);
+        Query elasticQuery = NativeQuery.builder()
+                .withQuery(query -> query.bool(bool -> bool.must(must -> must.match(match -> match.field("content").query(content)))))
+                .build();
         // TODO add tags treat.
-        return elasticsearchOperations.search(query, Posts.class);
+        return elasticsearchOperations.search(elasticQuery, Posts.class);
     }
 
 
