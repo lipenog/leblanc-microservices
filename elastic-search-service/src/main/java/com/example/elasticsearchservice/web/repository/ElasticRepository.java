@@ -9,35 +9,20 @@ import java.util.List;
 @Repository
 public interface ElasticRepository extends ElasticsearchRepository<Posts, String> {
     @Query("""
-        "bool": {
-        "must":[
-          {
-            "match": {
-              "content": "#{#content}"
+            {
+              "bool": {
+                "must": [
+                  {
+                    "match": {
+                      "content": "#{#content}"
+                    }
+                  }
+                ]
+                #{#shouldBlock}
+              }
             }
-          },
-          {
-            "match": {
-                "media_content": "#{#content}"
-            }
-          }
-        ],
-        "should": [
-          {
-            "match_phrase": {
-              "content": "#{#tags}"
-            }
-          }
-        ]
-        }
-        },
-        "highlight": {
-        "fragment_size": 500,
-        "fields": {
-            "content": {
-            }
-        }
-        }
-    """)
-    List<Posts> getPostsBySearch(String content, String tags);
+            """)
+    List<Posts> getPostsBySearch(String content, String shouldBlock);
+
+
 }

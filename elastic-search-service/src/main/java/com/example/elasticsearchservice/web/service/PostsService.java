@@ -5,6 +5,10 @@ import com.example.elasticsearchservice.web.dto.PostsDTO;
 import com.example.elasticsearchservice.web.entity.Posts;
 import com.example.elasticsearchservice.web.repository.ElasticRepository;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.query.Query;
+import org.springframework.data.elasticsearch.core.query.StringQuery;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -12,15 +16,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.UUID;
 import java.util.List;
-
 @Service
 public class PostsService {
     @Value("${constants.audio-path}")
     private String audioPath;
     private final ElasticRepository elasticRepository;
+    private final ElasticsearchOperations elasticsearchOperations;
 
-    public PostsService(ElasticRepository elasticRepository) {
+    public PostsService(ElasticRepository elasticRepository, ElasticsearchOperations elasticsearchOperations) {
         this.elasticRepository = elasticRepository;
+        this.elasticsearchOperations = elasticsearchOperations;
     }
 
     private String convertVideoToMP3(String originalPath){
@@ -56,9 +61,22 @@ public class PostsService {
         return convertAudioToText(audioPath);
     }
 
-    public List<Posts> searchPosts(String content){
+    public SearchHits<Posts> searchPosts(String content){
+        Query query = new StringQuery("""
+                                      {
+                                        "bool": {
+                                          "must": [
+                                            {
+                                              "match": {
+                                                "content": "senhor"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    """);
         // TODO add tags treat.
-        return elasticRepository.getPostsBySearch(content, "");
+        return elasticsearchOperations.search(query, Posts.class);
     }
 
 

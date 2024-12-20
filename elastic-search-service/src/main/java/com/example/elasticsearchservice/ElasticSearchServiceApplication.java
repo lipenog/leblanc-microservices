@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -20,6 +21,7 @@ import java.util.UUID;
 
 @SpringBootApplication
 @EnableElasticsearchRepositories
+@EntityScan(basePackages = "com.example.elasticsearchservice.web.entity")
 @EnableKafka
 public class ElasticSearchServiceApplication {
     public static void main(String[] args) {

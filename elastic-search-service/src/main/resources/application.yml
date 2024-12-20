@@ -17,3 +17,6 @@ spring:
     uris: http://127.0.0.1:9200
     username: elastic
     password: elastic
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false

@@ -3,6 +3,7 @@ package com.example.elasticsearchservice.web.controller;
 import com.example.elasticsearchservice.web.entity.Posts;
 import com.example.elasticsearchservice.web.service.PostsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +20,7 @@ public class PostsController {
     }
 
     @GetMapping("/posts")
-    public ResponseEntity<List<Posts>> searchPosts(@RequestParam String content){
+    public ResponseEntity<SearchHits<Posts>> searchPosts(@RequestParam String content){
         return ResponseEntity.ok(postsService.searchPosts(content));
     }
 }
