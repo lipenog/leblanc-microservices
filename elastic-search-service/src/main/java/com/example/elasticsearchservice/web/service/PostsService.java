@@ -4,6 +4,7 @@ import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
 import com.example.elasticsearchservice.web.dto.MediaDTO;
 import com.example.elasticsearchservice.web.dto.PostsDTO;
+import com.example.elasticsearchservice.web.dto.PostsSearchDTO;
 import com.example.elasticsearchservice.web.entity.Posts;
 import com.example.elasticsearchservice.web.repository.ElasticRepository;
 import org.springframework.beans.factory.annotation.Value;
@@ -128,10 +129,24 @@ public class PostsService {
                 .build();
     }
 
-    public SearchHits<Posts> searchPosts(String queryContent){
+    public PostsSearchDTO searchPosts(String queryContent){
         HashMap<String, Set<String>> treatedQuery = treatQuery(queryContent);
         Query elasticQuery = buildSearchQuery(treatedQuery);
-        return elasticsearchOperations.search(elasticQuery, Posts.class);
+        SearchHits<Posts> hits = elasticsearchOperations.search(elasticQuery, Posts.class);
+        // create Query DTO
+        PostsSearchDTO.PostsSearchQueryDTO queryDTO = new PostsSearchDTO.PostsSearchQueryDTO(
+                treatedQuery.get("match"),
+                treatedQuery.get("tags"),
+                treatedQuery.get("phrases"));
+
+        // parse hits results and map to DTO
+        Set<PostsSearchDTO.PostsSearchHitDTO> hitsDTO = hits.get().map(hit -> {
+            Posts postsHit = hit.getContent();
+            float score = hit.getScore();
+            return new PostsSearchDTO.PostsSearchHitDTO(score, postsHit.getId());
+        }).collect(Collectors.toSet());
+
+        return new PostsSearchDTO(queryDTO, hitsDTO);
     }
 
 
