@@ -1,5 +1,7 @@
 package com.example.elasticsearchservice.web.service;
 
+import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
+import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
 import com.example.elasticsearchservice.web.dto.MediaDTO;
 import com.example.elasticsearchservice.web.dto.PostsDTO;
 import com.example.elasticsearchservice.web.entity.Posts;
@@ -87,6 +89,9 @@ public class PostsService {
         // remove match phrases from query
         query = matcher.replaceAll("");
 
+        // treat final query ws
+        query = query.replaceAll("\\s+", " ");
+
         // add treated query elements
         treatedQuery.put("match", Set.of(query));
         treatedQuery.put("tags", tags);
@@ -95,11 +100,39 @@ public class PostsService {
         return treatedQuery;
     }
 
-    public SearchHits<Posts> searchPosts(String content){
-        Query elasticQuery = NativeQuery.builder()
-                .withQuery(query -> query.bool(bool -> bool.must(must -> must.match(match -> match.field("content").query(content)))))
+    private Query buildSearchQuery(HashMap<String, Set<String>> treatedQuery){
+        BoolQuery.Builder boolQuery = QueryBuilders.bool();
+
+        Set<String> matches = treatedQuery.get("match");
+        Set<String> tags = treatedQuery.get("tags");
+        Set<String> phrases = treatedQuery.get("phrases");
+
+        // add matches should queries
+        matches.forEach(match -> {
+            boolQuery.should(should -> should.match(matchQuery -> matchQuery.field("content").query(match)));
+            boolQuery.should(should -> should.match(matchQuery -> matchQuery.field("media_content").query(match)));
+        });
+
+        // add tags should queries
+        tags.forEach(tag -> {
+            boolQuery.should(should -> should.matchPhrase(matchPhrase -> matchPhrase.field("content").query(tag)));
+        });
+
+        // add phrases queries
+        phrases.forEach(phrase -> {
+            boolQuery.should(should -> should.matchPhrase(matchPhrase -> matchPhrase.field("content").query(phrase)));
+            boolQuery.should(should -> should.matchPhrase(matchPhrase -> matchPhrase.field("media_content").query(phrase)));
+        });
+
+        // build and return query
+        return NativeQuery.builder()
+                .withQuery(boolQuery.build()._toQuery())
                 .build();
-        // TODO add tags treat.
+    }
+
+    public SearchHits<Posts> searchPosts(String queryContent){
+        HashMap<String, Set<String>> treatedQuery = treatQuery(queryContent);
+        Query elasticQuery = buildSearchQuery(treatedQuery);
         return elasticsearchOperations.search(elasticQuery, Posts.class);
     }
 
