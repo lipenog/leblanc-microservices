@@ -19,7 +19,7 @@ public class PostsController {
         this.postsService = postsService;
     }
 
-    @GetMapping("/posts")
+    @GetMapping("/search")
     public ResponseEntity<SearchHits<Posts>> searchPosts(@RequestParam String content){
         return ResponseEntity.ok(postsService.searchPosts(content));
     }
