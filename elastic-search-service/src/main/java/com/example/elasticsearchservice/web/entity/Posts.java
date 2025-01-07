@@ -6,15 +6,15 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-@Document(indexName = "posts")
+@Document(indexName = "posts", createIndex = false)
 @NoArgsConstructor @AllArgsConstructor
 @Getter @Setter
-@ToString
+@ToString @Builder
 public class Posts {
     @Id
-    @Field(type = FieldType.Keyword)
+    @Field(type = FieldType.Keyword, name = "id")
     private String id;
-    @Field(type = FieldType.Text)
+    @Field(type = FieldType.Text, name = "content")
     private String content;
     @Field(type = FieldType.Text, name = "media_content")
     private String mediaContent;
