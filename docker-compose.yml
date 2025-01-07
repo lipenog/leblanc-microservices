@@ -72,6 +72,7 @@ services:
     environment:
       - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://naming-service:8761/eureka
     volumes:
       - ./data/media:/data/media/
       - ./data/audio:/data/audio/
