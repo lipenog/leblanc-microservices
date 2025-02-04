@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 public class PostsController {
@@ -33,5 +33,12 @@ public class PostsController {
         PostsDTO postsDTO = new PostsDTO(posts);
         postsTopicService.produceToPostsTopic(postsDTO);
         return new ResponseEntity<>(postsDTO, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Set<PostsDTO>> searchPosts(@RequestParam String content) {
+        Set<Posts> searchResult = postsService.searchPosts(content);
+        Set<PostsDTO> searchResponse = searchResult.stream().map(PostsDTO::new).collect(Collectors.toSet());
+        return ResponseEntity.ok(searchResponse);
     }
 }
