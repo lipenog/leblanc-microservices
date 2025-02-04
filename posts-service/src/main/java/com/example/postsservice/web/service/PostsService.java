@@ -1,8 +1,10 @@
 package com.example.postsservice.web.service;
 
+import com.example.postsservice.web.dto.PostsSearchDTO;
 import com.example.postsservice.web.dto.UsersDTO;
 import com.example.postsservice.web.entity.Media;
 import com.example.postsservice.web.entity.Posts;
+import com.example.postsservice.web.proxy.ElasticsearchService;
 import com.example.postsservice.web.proxy.UserServiceProxy;
 import com.example.postsservice.web.repository.PostsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,25 +16,39 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
+
 
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
-    private final PostsTopicService postsTopicService;
     private final UserServiceProxy userServiceProxy;
+    private final ElasticsearchService elasticsearchService;
+
     @Value(value = "${constants.media-path}")
     private String mediaPath;
 
     @Autowired
-    public PostsService(PostsRepository postsRepository, PostsTopicService postsTopicService, UserServiceProxy userServiceProxy) {
+    public PostsService(PostsRepository postsRepository, UserServiceProxy userServiceProxy, ElasticsearchService elasticsearchService) {
         this.postsRepository = postsRepository;
-        this.postsTopicService = postsTopicService;
         this.userServiceProxy = userServiceProxy;
+        this.elasticsearchService = elasticsearchService;
     }
-
+    public Set<Posts> searchPosts(String content) {
+        // calls search service
+        PostsSearchDTO searchResult = elasticsearchService.searchPosts(content);
+        // maps the dto to posts
+        return searchResult
+                .getHits()
+                .stream()
+                .map(postsSearchHitDTO -> {
+                    Optional<Posts> posts = postsRepository.findById(Long.valueOf(postsSearchHitDTO.getPostsDTO()));
+                    return posts.orElse(null);
+                })
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+    }
     public Posts createPosts(String loggedUserIdentifier, String content, List<MultipartFile> media) {
         UsersDTO users = userServiceProxy.getUserByIdentifier(loggedUserIdentifier);
         Posts posts = Posts.builder()
