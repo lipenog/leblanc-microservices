@@ -5,6 +5,16 @@ interface PostProps {
     post : IPost;
 }
 
+function Media(post: IPost) {
+    if(!post.media) return null;
+
+    // adicionar outros tipos de imagens
+    if(post.media.mediaType === 'jpg') 
+        return <img src={post.media.mediaPath} className={styles.postContentMedia}/>
+
+    return <video src={post.media.mediaPath} controls ></video>
+}
+
 function Post({post} : PostProps) {
     return ( 
     <li className={styles.post}>
@@ -15,7 +25,11 @@ function Post({post} : PostProps) {
                 <span className={styles.profileIdentidier}>@{post.identifier}</span>
             </div>
         </header>
-        <span className={styles.postContent}>{post.content}</span>
+        <div className={styles.postContent}>
+            <span className={styles.postContentText}>{post.content}</span>
+            {Media(post)}
+        </div>
+        <span className={styles.postDate}>{post.publishedAt}</span>
     </li> );
 }
 
