@@ -1,18 +1,17 @@
 import { IPost } from "../../../interfaces/Post/IPost";
+import { IMedia } from "../../../interfaces/Post/media";
 import styles from "../Posts.module.css"
 
 interface PostProps {
     post : IPost;
 }
 
-function Media(post: IPost) {
-    if(!post.media) return null;
-
+function media(media: IMedia) {
     // adicionar outros tipos de imagens
-    if(post.media.mediaType === 'jpg') 
-        return <img src={post.media.mediaPath} className={styles.postContentMedia}/>
+    if(media.mediaType === 'jpg') 
+        return <img src={media.mediaPath} className={styles.postContentMedia}/>
 
-    return <video src={post.media.mediaPath} controls ></video>
+    return <video src={media.mediaPath} controls ></video>
 }
 
 function Post({post} : PostProps) {
@@ -27,7 +26,7 @@ function Post({post} : PostProps) {
         </header>
         <div className={styles.postContent}>
             <span className={styles.postContentText}>{post.content}</span>
-            {Media(post)}
+            {post.media && media(post.media)}
         </div>
         <span className={styles.postDate}>{post.publishedAt}</span>
     </li> );

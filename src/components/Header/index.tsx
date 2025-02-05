@@ -6,7 +6,7 @@ function Header() {
         <header className={styles.header}>
             <div className={styles.home}>
                 <h1>Leblanc</h1>
-                <GiCoffeeCup/>
+                <GiCoffeeCup size={35}/>
             </div>
             <button>user</button>
         </header>    
