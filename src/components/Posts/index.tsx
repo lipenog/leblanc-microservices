@@ -16,14 +16,14 @@ const media1 : IMedia = {
 }
 
 const media2 : IMedia = {
-    id: 2,
+    id: 3,
     mediaType: "jpg",
     mediaPath: "./joker.jpg"
 }
 
 
 const video : IMedia = {
-    id: 2,
+    id: 4,
     mediaType: "mp4",
     mediaPath: "./pitoco.mp4"
 }
