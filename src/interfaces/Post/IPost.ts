@@ -6,7 +6,7 @@ interface IPost {
     name: string;
     content: string;
     image: string | null;
-    media?: IMedia;
+    media?: IMedia[];
     publishedAt: string;
 }
 

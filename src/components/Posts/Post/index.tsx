@@ -6,12 +6,23 @@ interface PostProps {
     post : IPost;
 }
 
-function media(media: IMedia) {
+function treatMedia(media: IMedia) {
     // adicionar outros tipos de imagens
     if(media.mediaType === 'jpg') 
         return <img src={media.mediaPath} className={styles.postContentMedia}/>
 
-    return <video src={media.mediaPath} controls ></video>
+    return (
+    <video className={styles.postContentMedia} controls>
+        <source src={media.mediaPath} type="video/mp4"></source>
+    </video>)
+}
+
+function mediaBox(mediaArray: IMedia[]) {
+    return (
+        <ul className={styles.postMediaBox}>
+            {mediaArray.map(media => <li key={media.id}>{treatMedia(media)}</li>)}
+        </ul>
+    )
 }
 
 function Post({post} : PostProps) {
@@ -26,7 +37,7 @@ function Post({post} : PostProps) {
         </header>
         <div className={styles.postContent}>
             <span className={styles.postContentText}>{post.content}</span>
-            {post.media && media(post.media)}
+            {post.media && mediaBox(post.media)}
         </div>
         <span className={styles.postDate}>{post.publishedAt}</span>
     </li> );
