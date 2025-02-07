@@ -1,11 +1,9 @@
 import styles from './Header.module.css'
 import { GiCoffeeCup } from "react-icons/gi";
 import { CiSearch } from "react-icons/ci";
-import { useState } from 'react';
+import Input from '../Input/Input';
 
 function Header() {
-    const [searchQuery, setSearchQuery] = useState('');
-
     return (
         <header className={styles.header}>
             <div className={styles.home} onClick={() => console.log('homes')}>
@@ -13,8 +11,7 @@ function Header() {
                 <GiCoffeeCup size={35}/>
             </div>            
             <div className={styles.searchBar}>
-                <input placeholder='search' className={styles.searchBarInput}></input>    
-                <CiSearch className={styles.searchIcon} size={30} onClick={() => console.log('search')}></CiSearch>
+                <Input placeholder='search' icon={CiSearch}/>
             </div>
         </header>    
     ) 

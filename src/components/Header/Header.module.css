@@ -30,20 +30,3 @@
     justify-content: center;
 }
 
-.searchBarInput {
-    border-radius: 2rem 0 0 2rem;
-    width: 100%;
-    height: 4rem;
-    color: var(--color-primary);
-    background-color: var(--color-white);
-    padding: 1rem;
-}
-
-.searchIcon {
-    border-radius: 0 2rem 2rem 0;
-    background-color: var(--color-white);
-    color: var(--color-primary);
-    height: 4rem;
-    padding-right: 10px;
-    size: 100;
-}

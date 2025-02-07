@@ -1,0 +1,15 @@
+.inputShape{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 2rem 2rem 2rem 2rem;
+    background-color: var(--color-white);
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.input {
+    border-radius: 2rem 2rem 2rem 2rem;
+    padding: 1rem;
+}
