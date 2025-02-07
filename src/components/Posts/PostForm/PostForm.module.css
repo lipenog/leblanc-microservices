@@ -7,7 +7,6 @@
     padding-top: 1rem;
     gap: 1rem;
     padding: 1rem;
-    height: 15rem;
 }
 
 .postFormBody {
@@ -15,7 +14,6 @@
     flex-direction: column;
     justify-content: space-between;
     width: 90%;
-    height: 100%;
     gap: 1rem;
 }
 
@@ -26,8 +24,7 @@
     align-items: center;
     justify-content: space-between;
     border-top: 1px solid var(--color-border);
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding: 1rem;
 }
 
 .postFromText {

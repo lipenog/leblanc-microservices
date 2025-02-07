@@ -1,7 +1,7 @@
 import { IPost } from "../../interfaces/Post/IPost";
 import styles from "./Posts.module.css"
 import Post from "./Post";
-import { IMedia } from "../../interfaces/Post/media";
+import { IMedia } from "../../interfaces/Post/IMedia";
 import PostForm from "./PostForm";
 
 const media : IMedia = {

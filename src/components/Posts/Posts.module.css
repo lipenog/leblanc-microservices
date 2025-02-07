@@ -48,7 +48,7 @@
 
 .postMediaBox {
     display: flex;
-    width: 70%;
+    padding: 1.5rem;
     align-items: center;
     justify-content: center;
     align-self: center;

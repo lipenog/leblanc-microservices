@@ -1,5 +1,5 @@
 import { IUser } from "../User/IUser";
-import { IMedia } from "./media";
+import { IMedia } from "./IMedia";
 
 interface IPost {
     id: number;
