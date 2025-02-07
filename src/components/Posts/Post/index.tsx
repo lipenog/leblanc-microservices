@@ -1,5 +1,6 @@
 import { IPost } from "../../../interfaces/Post/IPost";
 import { IMedia } from "../../../interfaces/Post/media";
+import UserImage from "../../User/UserImage";
 import styles from "../Posts.module.css"
 
 interface PostProps {
@@ -29,10 +30,10 @@ function Post({post} : PostProps) {
     return ( 
     <li className={styles.post}>
         <header className={styles.postHeader}>
-            <img src={post.image ? post.image : './user.jpg'} className={styles.profileImage}/>
+            <UserImage user={post.user}/>
             <div className={styles.profileInfo}>
-                <span className={styles.profileName}>{post.name}</span>
-                <span className={styles.profileIdentidier}>@{post.identifier}</span>
+                <span className={styles.profileName}>{post.user.name}</span>
+                <span className={styles.profileIdentidier}>@{post.user.identifier}</span>
             </div>
         </header>
         <div className={styles.postContent}>

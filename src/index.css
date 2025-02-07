@@ -8,7 +8,7 @@
 
 	/* Color Pallete */
 	--color-primary: #4d2919;
-	--color-secondary: #fffbf6;
+	--color-secondary: #c98986;
 	--color-text: #4d2919;
 	--color-text-secondary: #c98986;
 	--color-white: #fffbf6;
@@ -144,3 +144,7 @@ body {
 
 /* - - - - - - - - - - - - - - - - - - - - - - */
 
+.app {
+	display: flex;
+	flex-direction: column;
+}

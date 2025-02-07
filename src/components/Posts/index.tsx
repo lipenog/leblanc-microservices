@@ -2,6 +2,7 @@ import { IPost } from "../../interfaces/Post/IPost";
 import styles from "./Posts.module.css"
 import Post from "./Post";
 import { IMedia } from "../../interfaces/Post/media";
+import PostForm from "./PostForm";
 
 const media : IMedia = {
     id: 1,
@@ -29,15 +30,16 @@ const video : IMedia = {
 }
 
 const posts : IPost[] = [
-    { id: 1, name: 'botcity', identifier: 'gpv', content: 'Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. ', image: './bagre.jpeg', publishedAt: (new Date()).toISOString(), media: [media, media1, media2, video]},
-    { id: 2, name: 'francis', identifier: 'gabrielflamengos', content: 'Gabigol.', image: null, publishedAt: (new Date()).toISOString(), media: [media, media1, media2]},
-    { id: 3, name: 'megaVE', identifier: 'megaVE', content: 'Guten morgen', image: './bagre.jpeg', publishedAt: (new Date()).toISOString(), media: [media, video]},
-    { id: 4, name: 'luquetadocroquete', identifier: 'lucaamaferro', content: 'Ameinda.', image: './bagre.jpeg', publishedAt: (new Date()).toISOString(), media: [media]}
+    { id: 1, user : {id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}, content: 'Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. ', publishedAt: (new Date()).toISOString(), media: [media, media1, media2, video]},
+    { id: 2, user : {id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}, content: 'Gabigol.', publishedAt: (new Date()).toISOString(), media: [media, media1, media2]},
+    { id: 3, user : {id: 1, name: 'botcity', identifier: 'gpv', image: null}, content: 'Guten morgen', publishedAt: (new Date()).toISOString(), media: [media, video]},
+    { id: 4, user : {id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}, content: 'Ameinda.', publishedAt: (new Date()).toISOString(), media: [media]}
 ];
 
 function Posts() {
     return ( 
         <ul className={styles.posts}>
+            <PostForm key={-1} user={{id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}}></PostForm>
             {posts.map(post => <Post key={post.id} post={post}/>)}
         </ul>
     );
