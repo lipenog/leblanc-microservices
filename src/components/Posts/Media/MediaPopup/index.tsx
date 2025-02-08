@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IMedia } from "../../../../interfaces/Post/IMedia";
 import { FiArrowLeftCircle } from "react-icons/fi";
 import { FiArrowRightCircle } from "react-icons/fi";
+import { IoIosClose } from "react-icons/io";
 import Media from "../Media";
 import styles from "../Media.module.css"
 
@@ -28,18 +29,21 @@ function MediaPopup({trigger, startPosition, mediaArray, setTrigger} : Props) {
     }
     
     return trigger && (
-        <div className={styles.postMediaPopup}>
-            <header className={styles.postMidiaPopupHeader}>
-                <button onClick={setTrigger}>close</button>
-            </header>
-            <div className={styles.postMediaPopupBody}>
-                <FiArrowLeftCircle onClick={handleArrowClickBackward} size={20}/>
-                <div className={styles.postMediaPopupMedia}>
-                    <Media media={media}/>
-                </div>                                
-                <FiArrowRightCircle onClick={handleArrowClickFoward} size={20}/>
+        <>
+            <div className={styles.postMediaPopupBackground} onClick={setTrigger}/>
+            <div className={styles.postMediaPopup}>
+                <header className={styles.postMidiaPopupHeader}>
+                    <IoIosClose onClick={setTrigger} size={30}/>
+                </header>
+                <div className={styles.postMediaPopupBody}>
+                    <FiArrowLeftCircle onClick={handleArrowClickBackward} size={20}/>
+                    <div className={styles.postMediaPopupMedia}>
+                        <Media media={media}/>
+                    </div>                                
+                    <FiArrowRightCircle onClick={handleArrowClickFoward} size={20}/>
+                </div>
             </div>
-        </div>        
+        </>
     );
 }
 
