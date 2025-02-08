@@ -4,7 +4,7 @@ import UserImage from "../../User/UserImage";
 import styles from "./PostForm.module.css"
 import { useState } from "react";
 import { IMedia } from "../../../interfaces/Post/IMedia";
-import MediaBox from "../Media";
+import MediaBox from "../Media/MediaBox";
 
 interface Props {
     user: IUser;

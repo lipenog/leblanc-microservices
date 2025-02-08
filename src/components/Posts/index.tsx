@@ -13,13 +13,13 @@ const media : IMedia = {
 const media1 : IMedia = {
     id: 2,
     mediaType: "jpg",
-    mediaPath: "./joker.jpg"
+    mediaPath: "./akechi.jpg"
 }
 
 const media2 : IMedia = {
     id: 3,
-    mediaType: "jpg",
-    mediaPath: "./joker.jpg"
+    mediaType: "png",
+    mediaPath: "./morgana.png"
 }
 
 
@@ -30,10 +30,10 @@ const video : IMedia = {
 }
 
 const posts : IPost[] = [
-    { id: 1, user : {id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}, content: 'Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. ', publishedAt: (new Date()).toISOString(), media: [media, media1, media2, video]},
-    { id: 2, user : {id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}, content: 'Gabigol.', publishedAt: (new Date()).toISOString(), media: [media, media1, media2]},
-    { id: 3, user : {id: 1, name: 'botcity', identifier: 'gpv', image: null}, content: 'Guten morgen', publishedAt: (new Date()).toISOString(), media: [media, video]},
-    { id: 4, user : {id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}, content: 'Ameinda.', publishedAt: (new Date()).toISOString(), media: [media]}
+    { id: 1, user : {id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}, content: 'Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. ', publishedAt: (new Date()).toISOString(), media: [media, media1, media2]},
+    { id: 2, user : {id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}, content: 'Gabigol.', publishedAt: (new Date()).toISOString()},
+    { id: 3, user : {id: 1, name: 'botcity', identifier: 'gpv', image: null}, content: 'Guten morgen', publishedAt: (new Date()).toISOString()},
+    { id: 4, user : {id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}, content: 'Ameinda.', publishedAt: (new Date()).toISOString()}
 ];
 
 function Posts() {

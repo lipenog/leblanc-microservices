@@ -1,6 +1,6 @@
 import { IPost } from "../../../interfaces/Post/IPost";
 import UserImage from "../../User/UserImage";
-import MediaBox from "../Media";
+import MediaBox from "../Media/MediaBox";
 import styles from "../Posts.module.css"
 
 interface PostProps {

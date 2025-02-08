@@ -5,6 +5,7 @@
     justify-content: center;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+    border: 3px solid yellow;
 }
 
 .post {
@@ -45,31 +46,6 @@
     padding-right: 1.5rem;
 }
 
-
-.postMediaBox {
-    display: flex;
-    padding: 1.5rem;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-}
-
-
-.postContentMedia {
-    border-radius: 10%;
-    width: 28rem;
-    height: 28rem;
-    object-fit: cover;
-    border-color: 1px solid var(--color-border);
-}
-
-.profileImage {
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    width: 4.8rem;
-}
 
 .profileInfo {
     display: flex;
