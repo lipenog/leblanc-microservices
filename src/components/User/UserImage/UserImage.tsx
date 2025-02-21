@@ -1,5 +1,5 @@
 import styles from './User.module.css'
-import { IUser } from "../../interfaces/User/IUser";
+import { IUser } from "../../../interfaces/User/IUser";
 
 interface Props {
     user: IUser

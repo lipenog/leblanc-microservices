@@ -1,6 +1,6 @@
 import { IUser } from "../../../interfaces/User/IUser";
 import { CiImageOn } from "react-icons/ci";
-import UserImage from "../../User/UserImage";
+import UserImage from "../../User/UserImage/UserImage";
 import styles from "./PostForm.module.css"
 import { useState } from "react";
 import { IMedia } from "../../../interfaces/Post/IMedia";

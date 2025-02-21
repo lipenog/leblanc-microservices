@@ -10,7 +10,7 @@ interface Props {
 
 function MediaBox({mediaArray} : Props) {
     const [mediaModal, setMediaModal] = useState(false);
-    const [mediaClicked, setMediaClicked] = useState(1);
+    const [mediaClicked, setMediaClicked] = useState(0);
 
     const toggleMediaModal = () => {
         setMediaModal(!mediaModal)
@@ -22,7 +22,8 @@ function MediaBox({mediaArray} : Props) {
             <ul className={styles.postMediaBox}>
                 {mediaArray.map(media => <li key={media.id} onClick={() => {
                     toggleMediaModal();
-                    setMediaClicked(media.id);
+                    setMediaClicked(mediaArray.findIndex(mediaIndex => mediaIndex == media));
+                    console.log(mediaClicked)
                 }}>{<Media media={media}/>}</li>)}
             </ul>
             <MediaPopup 

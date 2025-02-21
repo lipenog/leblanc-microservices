@@ -22,6 +22,12 @@ const media2 : IMedia = {
     mediaPath: "./morgana.png"
 }
 
+const media3 : IMedia = {
+    id: 1,
+    mediaType: "jpeg",
+    mediaPath: "./ameinda.jpeg"
+}
+
 
 const video : IMedia = {
     id: 4,
@@ -31,17 +37,19 @@ const video : IMedia = {
 
 const posts : IPost[] = [
     { id: 1, user : {id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}, content: 'Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. ', publishedAt: (new Date()).toISOString(), media: [media, media1, media2]},
-    { id: 2, user : {id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}, content: 'Gabigol.', publishedAt: (new Date()).toISOString()},
-    { id: 3, user : {id: 1, name: 'botcity', identifier: 'gpv', image: null}, content: 'Guten morgen', publishedAt: (new Date()).toISOString()},
-    { id: 4, user : {id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}, content: 'Ameinda.', publishedAt: (new Date()).toISOString()}
+    { id: 2, user : {id: 2, name: 'gabrielflamengos', identifier: 'francis', image: './bagre.jpeg'}, content: 'Gabigol.', publishedAt: (new Date()).toISOString()},
+    { id: 3, user : {id: 1, name: 'megaVE', identifier: 'megaVE', image: null}, content: 'Guten morgen', publishedAt: (new Date()).toISOString()},
+    { id: 4, user : {id: 1, name: 'luquetadocrocs', identifier: 'lucaadoraferro10', image: './bagre.jpeg'}, content: 'Ameinda.', publishedAt: (new Date()).toISOString(), media: [media3]}
 ];
 
 function Posts() {
     return ( 
-        <ul className={styles.posts}>
-            <PostForm key={-1} user={{id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}}></PostForm>
-            {posts.map(post => <Post key={post.id} post={post}/>)}
-        </ul>
+        <div style={{marginTop : "4.8rem"}}>
+            <ul className={styles.posts}>
+                <PostForm key={-1} user={{id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}}></PostForm>
+                {posts.map(post => <Post key={post.id} post={post}/>)}
+            </ul>
+        </div>
     );
 }
 

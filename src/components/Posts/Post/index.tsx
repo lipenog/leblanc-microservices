@@ -1,5 +1,5 @@
 import { IPost } from "../../../interfaces/Post/IPost";
-import UserImage from "../../User/UserImage";
+import UserImage from "../../User/UserImage/UserImage";
 import MediaBox from "../Media/MediaBox";
 import styles from "../Posts.module.css"
 
