@@ -8,8 +8,8 @@
     justify-content: space-between;
     padding: 1rem;
     gap: 1rem;
-    bottom: 0;
-    right: 0;
+    bottom: 1rem;
+    right: 2rem;
 }
 
 .profileName {

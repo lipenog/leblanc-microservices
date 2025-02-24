@@ -1,14 +1,15 @@
-import Header from './components/Header'
-import Posts from './components/Posts';
-import CurrentUser from './components/User/CurrentUser';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './components/Pages/Home';
+import Profile from './components/Pages/Profile';
 
 function App() {
   return (
-  <>
-    <Header/>
-    <Posts/>
-    <CurrentUser user={{id: 1, identifier: '@gpv', name: 'piva', image: null}}/>
-  </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/:userIdentifier" element={<Profile />} />
+      </Routes>
+    </Router>
   );
 }
 
