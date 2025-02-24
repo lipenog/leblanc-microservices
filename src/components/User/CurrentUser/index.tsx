@@ -11,7 +11,7 @@ function CurrentUser({user} : Props) {
     const navigate = useNavigate();
 
     const navigateToMyProfile = () => {
-        navigate('/' + user.identifier);
+        navigate(`/${user.identifier}`);
     }
 
     return ( 
