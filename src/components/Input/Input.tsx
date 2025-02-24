@@ -1,4 +1,4 @@
-import { KeyboardEventHandler, useState } from 'react';
+import { useState } from 'react';
 import styles from './Input.module.css'
 import { CiSearch } from 'react-icons/ci';
 import { useNavigate } from 'react-router-dom';
