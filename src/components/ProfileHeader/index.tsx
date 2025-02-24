@@ -12,7 +12,7 @@ function ProfileHeader({user} : Props) {
         <div className={styles.profileInfo}>
             <div className={styles.profileName}>
                 <span>{user.name}</span>
-                <span>{user.identifier}</span>
+                <span className={styles.profileIdentifier}>{user.identifier}</span>
             </div>
             <div className={styles.profileBio}>
                 <span>Bem vindos ao meu perfil! (•‿•)</span>

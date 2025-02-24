@@ -17,11 +17,10 @@
 
 .profileInfo {
     display: flex;
-    border: 1px solid red;
     gap: 1px;
     flex: 100%;
+    height: 20rem;
     flex-direction: column;
-    justify-content: space-between;
     padding: 1px;
 }
 
@@ -30,12 +29,19 @@
     align-content: center;
     gap: 3px;
     font-size: 3rem;
+    color: var(--color-text);
+}
+
+.profileIdentifier {
+    color: var(--color-text-secondary);
 }
 
 .profileBio {
     display: flex;
-    align-self: center;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     font-size: 3rem;
+    color: var(--color-text);
 }
 
