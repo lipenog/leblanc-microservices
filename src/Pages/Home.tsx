@@ -1,9 +1,9 @@
-import { IMedia } from "../../interfaces/Post/IMedia";
-import { IPost } from "../../interfaces/Post/IPost";
-import Header from "../Header";
-import Posts from "../Posts";
-import PostForm from "../Posts/PostForm";
-import CurrentUser from "../User/CurrentUser";
+import Header from "../components/Header"
+import Posts from "../components/Posts"
+import PostForm from "../components/Posts/PostForm"
+import CurrentUser from "../components/User/CurrentUser"
+import { IMedia } from "../interfaces/Post/IMedia"
+import { IPost } from "../interfaces/Post/IPost"
 
 function Home() {
     const media : IMedia = {
