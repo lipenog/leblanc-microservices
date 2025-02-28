@@ -33,9 +33,6 @@ public class LoginDetailsValidationFilter extends OncePerRequestFilter {
                     if (delim == -1) {
                         throw new BadCredentialsException("");
                     }
-                    String email = token.substring(0, delim);
-                    String pwd = token.substring(delim + 1);
-
                 } catch (IllegalArgumentException e) {
                     throw new RemoteException();
                 }
