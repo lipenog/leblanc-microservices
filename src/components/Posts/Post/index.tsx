@@ -11,10 +11,10 @@ function Post({post} : PostProps) {
     return ( 
     <li className={styles.post}>
         <header className={styles.postHeader}>
-            <UserImage user={post.user}/>
+            <UserImage user={post.usersDTO}/>
             <div className={styles.profileInfo}>
-                <span className={styles.profileName}>{post.user.name}</span>
-                <span className={styles.profileIdentidier}>@{post.user.identifier}</span>
+                <span className={styles.profileName}>{post.usersDTO.name}</span>
+                <span className={styles.profileIdentidier}>@{post.usersDTO.identifier}</span>
             </div>
         </header>
         <div className={styles.postContent}>

@@ -9,6 +9,9 @@ const getPosts = async( content : string ) => {
         const response = await http.get<IPost[]> (POSTS_SEARCH_URL, {
             params: {
                 content: content
+            },
+            headers: {
+                'Authorization': 'Bearer: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTcHJpbmctQm9vdCIsInN1YiI6IkpXVCBUT0tFTiIsImVtYWlsIjoiZ3B2X19fXyIsImF1dGhvcml0aWVzIjoidXNlciIsImlhdCI6MTc0MDc1Nzg0NSwiZXhwIjoxNzQwODI5ODQ1fQ.xuBv2rH-0NuyZlqpGLdfvmU2WYNHQGozaF-QRz50NcA'
             }
         });
         return response;

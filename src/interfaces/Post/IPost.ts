@@ -3,7 +3,7 @@ import { IMedia } from "./IMedia";
 
 interface IPost {
     id: number;
-    user: IUser;
+    usersDTO: IUser;
     content: string;
     media?: IMedia[];
     publishedAt: string;
