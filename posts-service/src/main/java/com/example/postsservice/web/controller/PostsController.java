@@ -27,7 +27,7 @@ public class PostsController {
     }
 
     @PostMapping("/posts")
-    public ResponseEntity<PostsDTO> createPost(@RequestPart String content, @RequestPart List<MultipartFile> media) throws IOException {
+    public ResponseEntity<PostsDTO> createPost(@RequestPart String content, @RequestPart(required = false) List<MultipartFile> media) throws IOException {
         String loggedUserIdentifier = SecurityContextHolder.getContext().getAuthentication().getName();
         Posts posts = postsService.createPosts(loggedUserIdentifier, content, media);
         PostsDTO postsDTO = new PostsDTO(posts);
