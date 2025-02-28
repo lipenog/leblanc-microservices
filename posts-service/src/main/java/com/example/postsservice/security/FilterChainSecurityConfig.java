@@ -33,6 +33,7 @@ public class FilterChainSecurityConfig {
                 .addFilterBefore(new JWTValidatorFilter(JWT_HEADER, JWT_KEY), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/posts").authenticated()
+                        .requestMatchers("/posts/**").authenticated()
                         .requestMatchers("/search").authenticated()
                 )
                 .formLogin(Customizer.withDefaults())

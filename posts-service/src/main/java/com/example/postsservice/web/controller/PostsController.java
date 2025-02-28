@@ -43,12 +43,12 @@ public class PostsController {
 
         return new ResponseEntity<>(postsDTO, HttpStatus.CREATED);
     }
-    @GetMapping("/posts/{userID}")
-    public ResponseEntity<Set<PostsDTO>> getPostsByUserID(@PathVariable Long userID) {
+    @GetMapping("/posts/{user}")
+    public ResponseEntity<Set<PostsDTO>> getPostsByUserID(@PathVariable String user) {
         // finds user
-        UsersDTO usersDTO = userServiceProxy.getUserById(userID);
+        UsersDTO usersDTO = userServiceProxy.getUserByIdentifier(user);
         // search posts
-        Set<Posts> posts = postsService.getPostsByUserID(userID);
+        Set<Posts> posts = postsService.getPostsByUserID(usersDTO.getId());
         // converts dto
         Set<PostsDTO> response = posts
                 .stream()
