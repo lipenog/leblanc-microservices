@@ -13,7 +13,7 @@ public class CorsConfig implements CorsConfigurationSource {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOriginPatterns(Collections.singletonList("*"));
         configuration.setAllowedOrigins(
-                List.of("http://localhost:8765")
+                List.of("http://localhost:8765", "http://localhost:5173")
         );
         configuration.setAllowedMethods(Collections.singletonList("*"));
         configuration.setAllowCredentials(true);
