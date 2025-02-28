@@ -19,23 +19,28 @@ import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.Objects.isNull;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
-    private final UserServiceProxy userServiceProxy;
     private final ElasticsearchService elasticsearchService;
 
     @Value(value = "${constants.media-path}")
     private String mediaPath;
 
     @Autowired
-    public PostsService(PostsRepository postsRepository, UserServiceProxy userServiceProxy, ElasticsearchService elasticsearchService) {
+    public PostsService(PostsRepository postsRepository, ElasticsearchService elasticsearchService) {
         this.postsRepository = postsRepository;
-        this.userServiceProxy = userServiceProxy;
         this.elasticsearchService = elasticsearchService;
     }
     public Set<Posts> searchPosts(String content) {
+        // returns all posts if the search is empty
+        if(isNull(content) || isBlank(content)) {
+            return new HashSet<>(postsRepository.findAll());
+        }
         // calls search service
         PostsSearchDTO searchResult = elasticsearchService.searchPosts(content);
         // maps the dto to posts
@@ -49,10 +54,9 @@ public class PostsService {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
     }
-    public Posts createPosts(String loggedUserIdentifier, String content, List<MultipartFile> media) {
-        UsersDTO users = userServiceProxy.getUserByIdentifier(loggedUserIdentifier);
+    public Posts createPosts(long userID, String content, List<MultipartFile> media) {
         Posts posts = Posts.builder()
-                .userId(users.getId())
+                .userId(userID)
                 .content(content)
                 .mediaSet(media.stream().map(this::createMedia).collect(Collectors.toSet()))
                 .build();

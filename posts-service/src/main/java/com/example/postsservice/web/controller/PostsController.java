@@ -32,17 +32,23 @@ public class PostsController {
 
     @PostMapping("/posts")
     public ResponseEntity<PostsDTO> createPost(@RequestPart String content, @RequestPart(required = false) List<MultipartFile> media) throws IOException {
+        // get logged user info
         String loggedUserIdentifier = SecurityContextHolder.getContext().getAuthentication().getName();
         UsersDTO loggedUser = userServiceProxy.getUserByIdentifier(loggedUserIdentifier);
-        Posts posts = postsService.createPosts(loggedUserIdentifier, content, media);
+        // create post
+        Posts posts = postsService.createPosts(loggedUser.getId(), content, media);
         PostsDTO postsDTO = new PostsDTO(posts, loggedUser);
+        // produces kafka topic
         postsTopicService.produceToPostsTopic(postsDTO);
+
         return new ResponseEntity<>(postsDTO, HttpStatus.CREATED);
     }
 
     @GetMapping("/search")
     public ResponseEntity<Set<PostsDTO>> searchPosts(@RequestParam String content) {
+        // search with elasticsearch
         Set<Posts> searchResult = postsService.searchPosts(content);
+        // converts dto
         Set<PostsDTO> searchResponse = searchResult
                 .stream()
                 .map(posts -> {
