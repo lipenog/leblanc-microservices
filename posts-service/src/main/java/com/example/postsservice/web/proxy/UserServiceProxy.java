@@ -12,4 +12,6 @@ import java.util.Optional;
 public interface UserServiceProxy {
     @GetMapping("/users/identifier/{identifier}")
     UsersDTO getUserByIdentifier(@PathVariable String identifier);
+    @GetMapping("/users/{id}")
+    UsersDTO getUserById(@PathVariable Long id);
 }
