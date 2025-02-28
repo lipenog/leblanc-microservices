@@ -43,7 +43,20 @@ public class PostsController {
 
         return new ResponseEntity<>(postsDTO, HttpStatus.CREATED);
     }
+    @GetMapping("/posts/{userID}")
+    public ResponseEntity<Set<PostsDTO>> getPostsByUserID(@PathVariable Long userID) {
+        // finds user
+        UsersDTO usersDTO = userServiceProxy.getUserById(userID);
+        // search posts
+        Set<Posts> posts = postsService.getPostsByUserID(userID);
+        // converts dto
+        Set<PostsDTO> response = posts
+                .stream()
+                .map(post -> new PostsDTO(post, usersDTO))
+                .collect(Collectors.toSet());
 
+        return ResponseEntity.ok(response);
+    }
     @GetMapping("/search")
     public ResponseEntity<Set<PostsDTO>> searchPosts(@RequestParam String content) {
         // search with elasticsearch

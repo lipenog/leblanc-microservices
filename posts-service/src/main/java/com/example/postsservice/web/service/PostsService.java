@@ -36,6 +36,11 @@ public class PostsService {
         this.postsRepository = postsRepository;
         this.elasticsearchService = elasticsearchService;
     }
+
+    public Set<Posts> getPostsByUserID(Long userID) {
+        return postsRepository.getPostsByUserId(userID);
+    }
+
     public Set<Posts> searchPosts(String content) {
         // returns all posts if the search is empty
         if(isNull(content) || isBlank(content)) {
