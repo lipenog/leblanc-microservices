@@ -20,6 +20,19 @@ const getPosts = async( content : string ) => {
     }
 } 
 
+const getPostsByUser = async ( userIdentidier : string ) => {
+    try {
+        const response = await http.get<IPost[]> (`${POSTS_URL}/${userIdentidier}`, {
+            headers: {
+                'Authorization': 'Bearer: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTcHJpbmctQm9vdCIsInN1YiI6IkpXVCBUT0tFTiIsImVtYWlsIjoiZ3B2X19fXyIsImF1dGhvcml0aWVzIjoidXNlciIsImlhdCI6MTc0MDc1Nzg0NSwiZXhwIjoxNzQwODI5ODQ1fQ.xuBv2rH-0NuyZlqpGLdfvmU2WYNHQGozaF-QRz50NcA'
+            }
+        })
+        return response;
+    } catch (e) {
+        console.log(e)
+    }
+}
+
 const postPosts = async ( content: string, files : File[]) => {
     try {
         const formData = new FormData();
@@ -43,4 +56,4 @@ const postPosts = async ( content: string, files : File[]) => {
     }
 }
 
-export {postPosts, getPosts}
+export {postPosts, getPosts, getPostsByUser}

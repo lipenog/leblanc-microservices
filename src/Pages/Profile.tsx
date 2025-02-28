@@ -1,15 +1,24 @@
+import { useEffect, useState } from "react"
 import Header from "../components/Header"
 import Posts from "../components/Posts"
 import ProfileHeader from "../components/ProfileHeader"
 import { IPost } from "../interfaces/Post/IPost"
+import { getPostsByUser } from "../http/Posts"
+import { useParams } from "react-router-dom"
 
 function Profile() {
-    const posts : IPost[] = [
-        { id: 1, user : {id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}, content: 'Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. ', publishedAt: (new Date()).toISOString()},
-        { id: 2, user : {id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}, content: 'Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. ', publishedAt: (new Date()).toISOString()},
-        { id: 3, user : {id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}, content: 'Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. ', publishedAt: (new Date()).toISOString()}
-    ]
-    const loggedUser = {id: 1, identifier: '@gpv', name: 'piva', image: './bagre.jpeg'}
+    const loggedUser = {id: 1, identifier: '@gpv____', name: 'piva', image: './bagre.jpeg'}
+    const params = useParams();
+    const [posts, setPosts] = useState<IPost[]>([]);
+    
+    useEffect(() => {
+        if(params.userIdentifier) {
+            const response = getPostsByUser(params.userIdentifier);
+            response.then(res => res?.data && setPosts(res?.data));        
+        }        
+    }, [params]);
+
+
     return ( 
     <>
         <Header/>

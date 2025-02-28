@@ -7,7 +7,7 @@ import { getPosts } from "../http/Posts"
 import { IPost } from "../interfaces/Post/IPost"
 
 function Home() {
-    const loggedUser = {id: 1, identifier: '@gpv', name: 'piva', image: null}
+    const loggedUser = {id: 1, identifier: 'gpv____', name: 'piva', image: null}
     
     const [posts, setPosts] = useState<IPost[]>([]);
     
