@@ -11,10 +11,6 @@ function SearchInfo({query} : Props) {
                 <span>Exibindo resultados de:</span>
                 <span className={styles.textInfo}>{query}</span>            
             </div>
-            <div className={styles.searchInfoDetails}>
-                <span>tags:</span>
-                <span>phrases:</span>
-            </div>
         </div>
     );
 }

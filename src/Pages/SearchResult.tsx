@@ -4,6 +4,8 @@ import Header from "../components/Header";
 import Posts from "../components/Posts";
 import CurrentUser from "../components/User/CurrentUser";
 import SearchInfo from "../components/Posts/SearchInfo";
+import { getPosts } from "../http/Posts";
+import { useEffect, useState } from "react";
 
 
 function SearchResult( ) {
@@ -11,13 +13,16 @@ function SearchResult( ) {
     const searchParams = new URLSearchParams(location.search);
     const query = searchParams.get('q');
     
-    const posts : IPost[] = [
-        { id: 1, user : {id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}, content: 'Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. ', publishedAt: (new Date()).toISOString()},
-        { id: 2, user : {id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}, content: 'Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. ', publishedAt: (new Date()).toISOString()},
-        { id: 3, user : {id: 1, name: 'botcity', identifier: 'gpv', image: './bagre.jpeg'}, content: 'Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. Senhor. ', publishedAt: (new Date()).toISOString()}
-    ]
-
     const loggedUser = {id: 1, identifier: '@gpv', name: 'piva', image: null}
+
+    const [posts, setPosts] = useState<IPost[]>([]);
+
+    useEffect(() => {
+        if(query) {
+            const response = getPosts(query);
+            response.then(res => res?.data && setPosts(res?.data));
+        }
+    }, [query]);
 
     return ( 
     <>
