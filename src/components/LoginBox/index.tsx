@@ -13,7 +13,11 @@ function LoginBox() {
                 <div className={styles.loginInput}>
                     <input placeholder='username' className={styles.usernameInput}/>
                     <input placeholder='password' className={styles.passwordInput}/>
-                </div>        
+                </div>      
+                <div className={styles.loginFooter}>
+                    <span>new to Leblanc?&nbsp;</span>                
+                    <span className={styles.createAccount}>create an account.</span>
+                </div>  
             </div>
         </div>
         </>
