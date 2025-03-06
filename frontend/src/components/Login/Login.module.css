@@ -1,0 +1,123 @@
+.loginBackground {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: black; 
+    z-index: 0;
+}
+
+.loginBackground::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("leblanc.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.6; 
+    z-index: -1;
+}
+
+
+
+.loginBox {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    width: 50rem;
+    height: 30rem;
+    background-color: var(--color-white);
+    border-radius: 2rem 2rem 2rem 2rem;
+    z-index: 9999;
+}
+
+.registerBox {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    width: 50rem;
+    height: 40rem;
+    background-color: var(--color-white);
+    border-radius: 2rem 2rem 2rem 2rem;
+    z-index: 9999;
+}
+
+
+.loginHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    width: 100%;
+}
+
+.inputBox {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.normalInput {
+    border: 2px solid var(--color-primary);
+    width: 100%;
+    border-radius: 2rem 2rem 2rem 2rem;
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+.passwordInput {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border: 2px solid var(--color-primary);
+    width: 100%;
+    border-radius: 2rem 2rem 2rem 2rem;
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+.actionButton {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 0.4rem;
+}
+
+.actionButtonClick {
+    background-color: var(--color-secondary);
+    color: var(--color-text);
+    height: 3.5rem;
+    width: 7rem;
+    border-radius: 2rem 2rem 2rem 2rem;
+    font-size: 1.5rem;    
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    font-size: 1.5rem;    
+    color: var(--color-text);
+}
+
+.footerButton {
+    color: var(--color-text-secondary);
+}

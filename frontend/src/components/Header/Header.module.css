@@ -1,0 +1,33 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    padding: 0 10px 0 10px;
+    font-size: 1.8rem;
+    background-color: var(--color-primary);
+    border-bottom: 1.5px solid var(--color-border);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5.2rem;
+}
+
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    font-size: 1.8rem;
+    flex-grow: 0;
+    color: var(--color-white);
+}
+
+.searchBar {
+    display: flex;
+    width: 25%;
+    align-items: center;
+    justify-content: center;
+}
+

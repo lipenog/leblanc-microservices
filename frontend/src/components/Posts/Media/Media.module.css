@@ -1,0 +1,61 @@
+.postMediaBox {
+    display: flex;
+    padding: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.postContentMedia {
+    border-radius: 10%;
+    width: 28rem;
+    height: 28rem;
+    object-fit: cover;
+    border-color: 1px solid var(--color-border);
+}
+
+.postMediaPopupBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh; 
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    border: none; 
+}
+
+.postMediaPopup {
+    position: fixed;
+    display: flex;
+    align-self: center;
+    border: 1px solid red;
+    flex-direction: column;
+    background-color: var(--color-white);
+    z-index: 9999;
+}
+
+.postMediaPopupBody {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.postMidiaPopupHeader {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.postMediaPopupButton {
+    color: var(--color-text-secondary);
+}
