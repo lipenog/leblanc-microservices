@@ -17,6 +17,27 @@ function RegisterForm({setTrigger} : Props) {
 
     // todo add password and confirm password validation after submit
 
+    const handleSubmit = () => {
+        // verify the form
+        if (registerInfo.password !== registerInfo.confirm_password) {
+            alert("The passwords must be equal");
+            return;
+        }
+
+        if (registerInfo.name === null || registerInfo.name === '') {
+            alert("The name must not be null");
+            return
+        }
+
+        if (registerInfo.username === null || registerInfo.username === '') {
+            alert("The username must not be null");
+            return
+        }
+
+        // register the account calling axios
+        
+    }
+
     return ( 
         <>  
             <div className={styles.inputBox}>
@@ -26,7 +47,7 @@ function RegisterForm({setTrigger} : Props) {
                 <PasswordInput placeholder='confirm password' onChange={setConfirmPassword}/>                        
             </div>      
             <div className={styles.actionButton}>
-                <button className={styles.actionButtonClick} onClick={() => console.log(registerInfo)}>Register</button>
+                <button className={styles.actionButtonClick} onClick={() => handleSubmit()}>Register</button>
             </div>
             <div className={styles.footer}>
                 <span>Already have an account?&nbsp;</span>                
