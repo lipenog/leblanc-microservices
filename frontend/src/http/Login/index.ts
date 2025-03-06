@@ -1,3 +1,4 @@
+import { Cookies } from 'react-cookie';
 import { ILogin } from '../../interfaces/Login/ILogin';
 import { IRegister } from '../../interfaces/Login/IRegister';
 import { IUser } from '../../interfaces/User/IUser';
@@ -13,7 +14,11 @@ const handleLogin = async(login : ILogin) => {
             headers: {
                 'Authorization': `Basic ${basicAuth}`
             }
-        });
+        }); 
+        // set the user object and the session token in the cookies for future use
+        const cookies = new Cookies();
+        cookies.set('loggedUser', response.data, { path: '/' });
+        cookies.set('bearer', response.headers.authorization, { path: '/' });
         return response;
     } catch (e) {
         console.log(e);
