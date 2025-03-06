@@ -9,16 +9,16 @@ interface Props {
 }
 
 function RegisterForm({setTrigger} : Props) {
-    const [registerInfo] = useState<IRegister>({name:'', username:'', password:'', confirm_password:''});
+    const [registerInfo] = useState<IRegister>({name:'', identifier:'', password:''});
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     const setName = (name : string) => registerInfo.name = name;
-    const setUsername = (username : string) => registerInfo.username = username;
+    const setUsername = (username : string) => registerInfo.identifier = username;
     const setPassword = (password : string) => registerInfo.password = password;
-    const setConfirmPassword = (password : string) => registerInfo.confirm_password = password;
 
     const handleSubmit = () => {
         // verify the form
-        if (registerInfo.password !== registerInfo.confirm_password) {
+        if (registerInfo.password !== confirmPassword) {
             alert("The passwords must be equal");
             return;
         }
@@ -28,14 +28,14 @@ function RegisterForm({setTrigger} : Props) {
             return
         }
 
-        if (registerInfo.username === null || registerInfo.username === '') {
+        if (registerInfo.identifier === null || registerInfo.identifier === '') {
             alert("The username must not be null");
             return
         }
-
+        console.log(registerInfo)
         // register the account calling axios
         const response = handleRegister(registerInfo);
-        console.log(response);
+        response.then(res => console.log(res?.data))
     }
 
     return ( 

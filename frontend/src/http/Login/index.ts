@@ -9,7 +9,7 @@ const REGISTER_URL = 'user-service/register'
 const handleLogin = async(login : ILogin) => {
     const basicAuth = btoa(`${login.username}:${login.password}`);
     try {
-        const response = await http.get<IUser[]> (CREDENTIALS_URL, {
+        const response = await http.get<IUser> (CREDENTIALS_URL, {
             headers: {
                 'Authorization': `Basic ${basicAuth}`
             }
@@ -23,8 +23,7 @@ const handleLogin = async(login : ILogin) => {
 
 const handleRegister = async(register : IRegister) => {
     try {
-        const response = await http.post<IUser[]> (REGISTER_URL, {
-            data: register
+        const response = await http.post<IUser> (REGISTER_URL, register, {            
         });
         return response;
     } catch (e) {

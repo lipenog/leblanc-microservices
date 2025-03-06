@@ -33,7 +33,7 @@ function LoginForm({setTrigger} : Props) {
 
         // handle api call
         const response = handleLogin(loginInfo);
-        console.log(response);
+        response.then(res => console.log(res?.data))
     }
 
     return (     
@@ -43,7 +43,7 @@ function LoginForm({setTrigger} : Props) {
                 <PasswordInput placeholder='password' onChange={setPassword}/>                
             </div>      
             <div className={styles.actionButton}>
-                <button className={styles.actionButtonClick} onClick={() => console.log(loginInfo)}>Login</button>
+                <button className={styles.actionButtonClick} onClick={handleSubmit}>Login</button>
             </div>
             <div className={styles.footer}>
                 <span>new to Leblanc?&nbsp;</span>                
