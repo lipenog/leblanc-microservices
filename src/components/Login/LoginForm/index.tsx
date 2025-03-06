@@ -1,34 +1,23 @@
-import { FaRegEye } from "react-icons/fa";
-import { FaRegEyeSlash } from "react-icons/fa";
-import styles from './LoginForm.module.css'
-import { useState } from 'react';
+import styles from '../Login.module.css'
+import PasswordInput from "../PasswordInput";
 
 interface Props {
     setTrigger: () => void
 }
 
 function LoginForm({setTrigger} : Props) {
-    const [togglePasswordView, setTogglePasswordView] = useState(false);
-
-    const iconClick = () => {
-        setTogglePasswordView(!togglePasswordView);
-    }
-
     return (     
         <>
-            <div className={styles.loginInput}>
-                <input placeholder='username' type='input' className={styles.usernameInput}/>
-                <div className={styles.passwordInput}>
-                    <input placeholder='password' type={togglePasswordView ? 'input' : 'password'}/>
-                    {togglePasswordView ? <FaRegEye size={20} onClick={iconClick}/> : <FaRegEyeSlash size={20} onClick={iconClick}/>}
-                </div>                    
+            <div className={styles.inputBox}>
+                <input placeholder='username' type='input' className={styles.normalInput}/>
+                <PasswordInput placeholder='password'/>                
             </div>      
-            <div className={styles.loginButton}>
-                <button className={styles.loginButtonClick}>Login</button>
+            <div className={styles.actionButton}>
+                <button className={styles.actionButtonClick}>Login</button>
             </div>
-            <div className={styles.loginFooter}>
+            <div className={styles.footer}>
                 <span>new to Leblanc?&nbsp;</span>                
-                <span className={styles.createAccount} onClick={setTrigger}>create an account.</span>
+                <span className={styles.footerButton} onClick={setTrigger}>create an account.</span>
             </div>  
         </>
     );
