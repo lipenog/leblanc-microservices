@@ -30,6 +30,7 @@
     width: 100%;
     align-items: center;
     justify-content: flex-end;
+    padding-right: 0.4rem;
 }
 
 .loginButtonClick {
