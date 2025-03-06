@@ -1,0 +1,19 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px 0 30px;
+    font-size: 1.8rem;
+    background-color: var(--color-primary);
+    border-bottom: 1.5px solid var(--color-border);
+}
+
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    font-size: 1.8rem;
+    color: var(--color-white);
+}
+

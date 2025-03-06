@@ -6,3 +6,4 @@
 | Post Service | 9000 |
 | Search Service | 8000 |
 | Kafka KRaft | 9092 |
+

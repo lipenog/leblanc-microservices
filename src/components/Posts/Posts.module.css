@@ -1,0 +1,52 @@
+.posts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.post {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    border-top: 0px;
+}
+
+.postHeader {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.5rem;    
+}
+
+.postContent {
+    font-size: 3rem;
+}
+
+.profileImage {
+aspect-ratio: 1/1;
+    border-radius: 50%;
+    width: 4.8rem;
+}
+
+.profileInfo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+}
+
+.profileName {
+    font-size: 2.5rem;
+    color: var(--color-text);
+}
+
+.profileIdentidier {
+    font-size: 2.5rem;
+    color: var(--color-text-secondary);
+}
