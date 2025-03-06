@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Pages/Home';
 import Profile from './Pages/Profile';
 import SearchResult from './Pages/SearchResult';
-import LoginBox from './components/LoginBox';
+import Login from './Pages/Login';
 
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/:userIdentifier" element={<Profile />} />
         <Route path="/search" element={<SearchResult/>} />
-        <Route path="/login" element={<LoginBox/>} />
+        <Route path="/login" element={<Login/>} />
       </Routes>
     </Router>
   );

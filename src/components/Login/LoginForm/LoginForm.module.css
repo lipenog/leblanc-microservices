@@ -1,0 +1,55 @@
+.loginInput {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.usernameInput {
+    border: 2px solid var(--color-primary);
+    width: 100%;
+    border-radius: 2rem 2rem 2rem 2rem;
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+.passwordInput {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border: 2px solid var(--color-primary);
+    width: 100%;
+    border-radius: 2rem 2rem 2rem 2rem;
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+.loginButton {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.loginButtonClick {
+    background-color: var(--color-secondary);
+    color: var(--color-text);
+    height: 3rem;
+    width: 6rem;
+    border-radius: 2rem 2rem 2rem 2rem;
+    font-size: 1.5rem;    
+}
+
+.loginFooter {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    font-size: 1.5rem;    
+    color: var(--color-text);
+}
+
+.createAccount {
+    color: var(--color-text-secondary);
+}
