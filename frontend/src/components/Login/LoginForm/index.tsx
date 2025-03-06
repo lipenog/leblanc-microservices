@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styles from '../Login.module.css'
 import PasswordInput from "../PasswordInput";
 import { ILogin } from '../../../interfaces/Login/ILogin';
+import { handleLogin } from "../../../http/Login";
 
 interface Props {
     setTrigger: () => void
@@ -16,6 +17,23 @@ function LoginForm({setTrigger} : Props) {
 
     const setPassword = (password : string) => {
         loginInfo.password = password;
+    }
+
+    const handleSubmit = () => {
+        // verify dto
+        if(loginInfo.username === '') {
+            alert("The username must not be null")
+            return;
+        }
+
+        if(loginInfo.password === '') {
+            alert("The password must not be null")
+            return;
+        }
+
+        // handle api call
+        const response = handleLogin(loginInfo);
+        console.log(response);
     }
 
     return (     
