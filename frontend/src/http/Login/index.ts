@@ -32,4 +32,4 @@ const handleRegister = async(register : IRegister) => {
     }   
 }
 
-export default {handleLogin, handleRegister}
+export {handleLogin, handleRegister}

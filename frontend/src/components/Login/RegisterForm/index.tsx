@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styles from '../Login.module.css'
 import PasswordInput from '../PasswordInput';
 import { IRegister } from '../../../interfaces/Login/IRegister';
+import { handleRegister } from "../../../http/Login";
 
 interface Props {
     setTrigger : () => void
@@ -14,8 +15,6 @@ function RegisterForm({setTrigger} : Props) {
     const setUsername = (username : string) => registerInfo.username = username;
     const setPassword = (password : string) => registerInfo.password = password;
     const setConfirmPassword = (password : string) => registerInfo.confirm_password = password;
-
-    // todo add password and confirm password validation after submit
 
     const handleSubmit = () => {
         // verify the form
@@ -35,7 +34,8 @@ function RegisterForm({setTrigger} : Props) {
         }
 
         // register the account calling axios
-        
+        const response = handleRegister(registerInfo);
+        console.log(response);
     }
 
     return ( 
@@ -47,7 +47,7 @@ function RegisterForm({setTrigger} : Props) {
                 <PasswordInput placeholder='confirm password' onChange={setConfirmPassword}/>                        
             </div>      
             <div className={styles.actionButton}>
-                <button className={styles.actionButtonClick} onClick={() => handleSubmit()}>Register</button>
+                <button className={styles.actionButtonClick} onClick={handleSubmit}>Register</button>
             </div>
             <div className={styles.footer}>
                 <span>Already have an account?&nbsp;</span>                
@@ -58,3 +58,4 @@ function RegisterForm({setTrigger} : Props) {
 }
 
 export default RegisterForm;
+
