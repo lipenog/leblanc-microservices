@@ -22,7 +22,7 @@ function LoginForm({setTrigger} : Props) {
         <>
             <div className={styles.inputBox}>
                 <input placeholder='username' type='input' className={styles.normalInput} onChange={(e) => setUser(e.target.value)}/>
-                <PasswordInput placeholder='password' value={loginInfo.password} onChange={setPassword}/>                
+                <PasswordInput placeholder='password' onChange={setPassword}/>                
             </div>      
             <div className={styles.actionButton}>
                 <button className={styles.actionButtonClick} onClick={() => console.log(loginInfo)}>Login</button>
