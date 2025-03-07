@@ -9,6 +9,7 @@ interface Props {
 }
 
 function Posts({posts, header} : Props) {
+    console.log(posts)
     return ( 
         <div style={{marginTop : "4.8rem"}}>
             <ul className={styles.posts}>
