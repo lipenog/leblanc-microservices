@@ -6,7 +6,8 @@ interface Props {
 }
 
 function treatMedia(media: IMedia) {
-    if(media.mediaType === '.jpg' || media.mediaType === '.png' || media.mediaType === '.jpeg') 
+    media.mediaType = media.mediaType.replace('.', '');
+    if(media.mediaType === 'jpg' || media.mediaType === 'png' || media.mediaType === 'jpeg') 
         return <img src={media.mediaPath} className={styles.postContentMedia}/>
 
     return (
