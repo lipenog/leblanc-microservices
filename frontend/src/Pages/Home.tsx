@@ -20,7 +20,7 @@ function Home() {
     <>
         <Header/>
         <Posts posts={posts} header={<PostForm key={-1} user={loggedUser}></PostForm>}/>
-        <CurrentUser user={loggedUser}/>
+        <CurrentUser/>
     </>
     );
 }

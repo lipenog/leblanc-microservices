@@ -9,9 +9,6 @@ const getPosts = async( content : string ) => {
         const response = await http.get<IPost[]> (POSTS_SEARCH_URL, {
             params: {
                 content: content
-            },
-            headers: {
-                'Authorization': 'Bearer: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTcHJpbmctQm9vdCIsInN1YiI6IkpXVCBUT0tFTiIsImVtYWlsIjoiZ3B2X19fXyIsImF1dGhvcml0aWVzIjoidXNlciIsImlhdCI6MTc0MDc1Nzg0NSwiZXhwIjoxNzQwODI5ODQ1fQ.xuBv2rH-0NuyZlqpGLdfvmU2WYNHQGozaF-QRz50NcA'
             }
         });
         return response;
@@ -23,9 +20,6 @@ const getPosts = async( content : string ) => {
 const getPostsByUser = async ( userIdentidier : string ) => {
     try {
         const response = await http.get<IPost[]> (`${POSTS_URL}/${userIdentidier}`, {
-            headers: {
-                'Authorization': 'Bearer: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTcHJpbmctQm9vdCIsInN1YiI6IkpXVCBUT0tFTiIsImVtYWlsIjoiZ3B2X19fXyIsImF1dGhvcml0aWVzIjoidXNlciIsImlhdCI6MTc0MDc1Nzg0NSwiZXhwIjoxNzQwODI5ODQ1fQ.xuBv2rH-0NuyZlqpGLdfvmU2WYNHQGozaF-QRz50NcA'
-            }
         })
         return response;
     } catch (e) {
@@ -45,7 +39,6 @@ const postPosts = async ( content: string, files : File[]) => {
             method: 'POST',
             headers : {
                 'Content-Type': 'multipart/form-data',
-                'Authorization': 'Bearer: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTcHJpbmctQm9vdCIsInN1YiI6IkpXVCBUT0tFTiIsImVtYWlsIjoiZ3B2X19fXyIsImF1dGhvcml0aWVzIjoidXNlciIsImlhdCI6MTc0MDc1Nzg0NSwiZXhwIjoxNzQwODI5ODQ1fQ.xuBv2rH-0NuyZlqpGLdfvmU2WYNHQGozaF-QRz50NcA'
             },
             data: formData
         })
