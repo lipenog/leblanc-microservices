@@ -6,15 +6,12 @@ interface Props {
 }
 
 function treatMedia(media: IMedia) {
-
-    const mediaPath = `file:///home/lipe/Documents/leblanc${media.mediaPath}`
-
     if(media.mediaType === 'jpg' || media.mediaType === 'png' || media.mediaType === 'jpeg') 
-        return <img src={mediaPath} className={styles.postContentMedia}/>
+        return <img src={media.mediaPath} className={styles.postContentMedia}/>
 
     return (
     <video className={styles.postContentMedia} controls>
-        <source src={mediaPath} type="video/mp4"></source>
+        <source src={media.mediaPath} type="video/mp4"></source>
     </video>)
 }
 
