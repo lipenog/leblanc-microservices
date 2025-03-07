@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { IPost } from "../../../interfaces/Post/IPost";
 import UserImage from "../../User/UserImage/UserImage";
 import MediaBox from "../Media/MediaBox";
@@ -8,9 +9,15 @@ interface PostProps {
 }
 
 function Post({post} : PostProps) {
+    const navigate = useNavigate();
+
+    const handleHeaderClick = () => {
+        navigate(`/${post.usersDTO.identifier}`);
+    }
+
     return ( 
     <li className={styles.post}>
-        <header className={styles.postHeader}>
+        <header className={styles.postHeader} onClick={handleHeaderClick}>
             <UserImage user={post.usersDTO}/>
             <div className={styles.profileInfo}>
                 <span className={styles.profileName}>{post.usersDTO.name}</span>

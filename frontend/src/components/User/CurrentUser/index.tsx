@@ -1,5 +1,4 @@
 import { useCookies } from "react-cookie";
-import { IUser } from "../../../interfaces/User/IUser";
 import UserImage from "../UserImage/UserImage";
 import styles from './CurrentUser.module.css'
 import { useNavigate } from "react-router-dom";
