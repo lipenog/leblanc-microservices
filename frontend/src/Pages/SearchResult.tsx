@@ -28,7 +28,7 @@ function SearchResult( ) {
     <>
         <Header/>
         <Posts posts={posts} header={<SearchInfo query={query}/>}/>
-        <CurrentUser user={loggedUser}/>
+        <CurrentUser/>
     </>
  );
 }
