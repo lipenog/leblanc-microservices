@@ -81,7 +81,7 @@ public class PostsService {
 
         // creates entity
         return Media.builder()
-                .mediaPath(mediaPath + fileName)
+                .mediaPath(fileName)
                 .mediaType(fileExtension)
                 .build();
     }
