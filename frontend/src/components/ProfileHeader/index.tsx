@@ -2,11 +2,12 @@ import { IUser } from "../../interfaces/User/IUser";
 import styles from "./ProfileHeader.module.css"
 
 interface Props {
-    user : IUser;
+    user : IUser | undefined;
 }
 
 function ProfileHeader({user} : Props) {
     return ( 
+    user &&
     <div className={styles.profileHeader}>
         <img src={user.image ? user.image : './user.jpg'} className={styles.profileImage}/>
         <div className={styles.profileInfo}>
