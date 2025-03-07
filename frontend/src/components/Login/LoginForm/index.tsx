@@ -3,6 +3,8 @@ import styles from '../Login.module.css'
 import PasswordInput from "../PasswordInput";
 import { ILogin } from '../../../interfaces/Login/ILogin';
 import { handleLogin } from "../../../http/Login";
+import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 interface Props {
     setTrigger: () => void
@@ -10,6 +12,7 @@ interface Props {
 
 function LoginForm({setTrigger} : Props) {
     const [loginInfo] = useState<ILogin>({username: '', password: ''});
+    const navigate = useNavigate();
 
     const setUser = (username : string) => {
         loginInfo.username = username;
@@ -18,6 +21,8 @@ function LoginForm({setTrigger} : Props) {
     const setPassword = (password : string) => {
         loginInfo.password = password;
     }
+
+    const [bearer] = useCookies(['bearer']);
 
     const handleSubmit = () => {
         // verify dto
@@ -33,7 +38,14 @@ function LoginForm({setTrigger} : Props) {
 
         // handle api call
         const response = handleLogin(loginInfo);
-        response.then(res => console.log(res?.data))
+        // navigate to home after login 
+        
+	    console.log(bearer.bearer);
+        response.then(res => {
+            if(res?.status === 200) {
+                navigate('/');
+            }
+        })
     }
 
     return (     

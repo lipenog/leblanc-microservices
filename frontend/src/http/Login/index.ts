@@ -12,7 +12,9 @@ const handleLogin = async(login : ILogin) => {
     try {
         const response = await http.get<IUser> (CREDENTIALS_URL, {
             headers: {
-                'Authorization': `Basic ${basicAuth}`
+                'Authorization': `Basic ${basicAuth}`,
+                Accept: "application/json",
+		        Content: "application/json"
             }
         }); 
         // set the user object and the session token in the cookies for future use
