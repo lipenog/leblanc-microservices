@@ -15,6 +15,12 @@ function Post({post} : PostProps) {
         navigate(`/${post.usersDTO.identifier}`);
     }
 
+    const formatDate = (publishedAt : string) => {
+        const date = new Date(publishedAt);
+
+        return `${date.getMonth()}/${date.getDate()}/${date.getFullYear()} - ${date.getHours()}:${date.getMinutes()}`
+    }
+
     return ( 
     <li className={styles.post}>
         <header className={styles.postHeader} onClick={handleHeaderClick}>
@@ -28,7 +34,7 @@ function Post({post} : PostProps) {
             <span className={styles.postContentText}>{post.content}</span>
             {post.media && <MediaBox mediaArray={post.media}/>}
         </div>
-        <span className={styles.postDate}>{post.publishedAt}</span>
+        <span className={styles.postDate}>{formatDate(post.publishedAt)}</span>
     </li> );
 }
 
