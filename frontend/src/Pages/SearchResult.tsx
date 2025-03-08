@@ -12,8 +12,6 @@ function SearchResult( ) {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const query = searchParams.get('q');
-    
-    const loggedUser = {id: 1, identifier: '@gpv', name: 'piva', image: null}
 
     const [posts, setPosts] = useState<IPost[]>([]);
 

@@ -34,6 +34,7 @@ public class FilterChainSecurityConfig {
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/posts").authenticated()
                         .requestMatchers("/posts/**").authenticated()
+                        .requestMatchers("/media/**").permitAll()
                         .requestMatchers("/search").authenticated()
                 )
                 .formLogin(Customizer.withDefaults())
