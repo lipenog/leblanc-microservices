@@ -103,7 +103,8 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/user-service
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://naming-service:8761/eureka
-
+    volumes:
+      - ./data/media:/data/media/
   naming-service:
     build: ./naming-service
     ports:
