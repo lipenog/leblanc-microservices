@@ -1,6 +1,9 @@
 server:
   port: 9090
 
+constants:
+  media-path: /data/media/
+
 eureka:
   client:
     service-url:
@@ -23,6 +26,11 @@ spring:
     baseline-on-migrate: true
   application:
     name: user-service
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
 
 
 logging:

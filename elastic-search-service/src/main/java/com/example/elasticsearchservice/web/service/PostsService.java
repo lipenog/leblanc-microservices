@@ -27,6 +27,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class PostsService {
+    @Value("${constants.media-path}")
+    private String mediaPath;
     @Value("${constants.audio-path}")
     private String audioPath;
     private final ElasticRepository elasticRepository;
@@ -154,8 +156,8 @@ public class PostsService {
         // filters only mp4 files path
         List<String> postMP4FilesPath = postsDTO.getMedia()
                 .stream()
-                .filter(mediaDTO -> mediaDTO.getMediaType().equals(".mp4"))
-                .map(MediaDTO::getMediaPath)
+                .filter(mediaDTO -> mediaDTO.getMediaType().equals(".mp4") || mediaDTO.getMediaPath().equals("mp4"))
+                .map(media -> mediaPath + media.getMediaPath())
                 .toList();
         postMP4FilesPath.forEach(System.out::println);
         // appends every media

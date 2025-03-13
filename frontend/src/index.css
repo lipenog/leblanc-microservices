@@ -14,6 +14,9 @@
 	--color-white: #f5f5f5;
 	--color-border: #4d2919;
 
+	--color-green: #0C7C59;
+	--color-red: #DA344D;
+
 	/* -------------------------- */
 	--color-gradient: linear-gradient(to right, #5c80bc, #6a7097);
 	--color-selection: #6a7097dd;
@@ -23,7 +26,6 @@
 	
 	--color-black: #262626;
 
-	--color-red: #b74e4e;
 	--color-dark-red: #993333;
 
 	--color-warning: #e8c547;

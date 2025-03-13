@@ -20,6 +20,7 @@ public class Users {
     private String name;
     private String password;
     private LocalDate creation;
+    private String image;
     @PrePersist
     private void setDate(){
         this.creation = LocalDate.now(ZoneId.of("UTC"));

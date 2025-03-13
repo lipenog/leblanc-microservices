@@ -2,6 +2,7 @@ server:
   port: 8000
 
 constants:
+  media-path: /data/media/
   audio-path: /data/audio/
 
 eureka:

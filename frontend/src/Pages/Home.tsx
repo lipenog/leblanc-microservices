@@ -5,10 +5,9 @@ import PostForm from "../components/Posts/PostForm"
 import CurrentUser from "../components/User/CurrentUser"
 import { getPosts } from "../http/Posts"
 import { IPost } from "../interfaces/Post/IPost"
+import { getLoggedUser } from "../http/Cookies"
 
-function Home() {
-    const loggedUser = {id: 1, identifier: 'gpv____', name: 'piva', image: null}
-    
+function Home() {    
     const [posts, setPosts] = useState<IPost[]>([]);
     
     useEffect(() => {
@@ -19,7 +18,7 @@ function Home() {
     return (
     <>
         <Header/>
-        <Posts posts={posts} header={<PostForm key={-1} user={loggedUser}></PostForm>}/>
+        <Posts posts={posts} header={<PostForm key={-1} user={getLoggedUser()}></PostForm>}/>
         <CurrentUser/>
     </>
     );

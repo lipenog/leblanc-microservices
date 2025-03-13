@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { getBearer } from "../Cookies";
 
 const BACK_URL = 'http://localhost:8765';
@@ -19,5 +19,15 @@ http.interceptors.request.use(function (config) {
 	}
 	return config;
 })
+
+http.interceptors.response.use(function (response) {
+    return response;
+  }, function (error : AxiosError) {
+	console.log(error);
+	if (error.response?.status === 401) {
+		window.location.href = '/login'
+	}
+    return Promise.reject(error);
+  })
 
 export { http }

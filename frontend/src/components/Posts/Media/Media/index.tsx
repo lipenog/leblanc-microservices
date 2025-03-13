@@ -6,13 +6,14 @@ interface Props {
 }
 
 function treatMedia(media: IMedia) {
+    const path = `http://localhost:9000/media/${media.mediaPath}`
     media.mediaType = media.mediaType.replace('.', '');
     if(media.mediaType === 'jpg' || media.mediaType === 'png' || media.mediaType === 'jpeg') 
-        return <img src={media.mediaPath} className={styles.postContentMedia}/>
+        return <img src={path} className={styles.postContentMedia}/>
 
     return (
     <video className={styles.postContentMedia} controls>
-        <source src={media.mediaPath} type="video/mp4"></source>
+        <source src={path} type="video/mp4"></source>
     </video>)
 }
 
