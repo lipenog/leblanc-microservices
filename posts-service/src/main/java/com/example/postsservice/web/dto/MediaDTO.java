@@ -10,7 +10,7 @@ public class MediaDTO {
     private final String mediaType;
     public MediaDTO(Media media){
         this.id = media.getId();
-        this.mediaPath = "http://localhost:9000/media/" + media.getMediaPath();
+        this.mediaPath = media.getMediaPath();
         this.mediaType = media.getMediaType();
     }
 }
