@@ -2,13 +2,20 @@ import { useCookies } from "react-cookie";
 import UserImage from "../UserImage/UserImage";
 import styles from './CurrentUser.module.css'
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function CurrentUser() {
     const navigate = useNavigate();
     const [cookies] = useCookies(['loggedUser']); 
-    
-    const user = cookies.loggedUser;
+    const [user, setUser] = useState<any>();
 
+    useEffect(() => {
+        setUser(cookies.loggedUser);
+        if(user === undefined) {
+            navigate('/login');
+        }
+    }, [cookies]);
+    
 
     const navigateToMyProfile = () => {
         navigate(`/${user.identifier}`);

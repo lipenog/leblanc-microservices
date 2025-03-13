@@ -5,19 +5,28 @@ import com.example.usersservice.web.dto.UsersDTO;
 import com.example.usersservice.web.entity.Users;
 import com.example.usersservice.web.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UsersService {
     private final UsersRepository usersRepository;
     private final PasswordEncoder passwordEncoder;
+    @Value(value = "${constants.media-path}")
+    private String mediaPath;
 
     @Autowired
     public UsersService(UsersRepository usersRepository, PasswordEncoder passwordEncoder) {
@@ -52,8 +61,40 @@ public class UsersService {
         return usersRepository.save(users);
     }
 
+    public Users updateUserImage(Users users, MultipartFile image) {
+        String imagePath = saveUserImage(image);
+        users.setImage(imagePath);
+        return usersRepository.save(users);
+    }
+
     public Page<Users> searchUsers(String content, int page){
         Pageable pageable = PageRequest.of(page, 20);
         return usersRepository.findAllByNameLikeOrIdentifierLike("%" + content + "%", "%" + content + "%", pageable);
+    }
+
+    private String saveUserImage(MultipartFile media){
+        String originalFileName = media.getOriginalFilename();
+        // creates new name
+        String fileName = UUID.randomUUID().toString();
+        // copy original file type
+        String fileExtension = originalFileName.substring(originalFileName.indexOf("."));
+        fileName = fileName + fileExtension;
+
+        // save media in disk
+        saveMedia(media, fileName);
+
+        // creates entity
+        return fileName;
+    }
+
+    private void saveMedia(MultipartFile media, String fileName) {
+        // concat media path with file name
+        Path path = Path.of(mediaPath, fileName);
+        // saves the image
+        try {
+            Files.copy(media.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to copy file " + media.getOriginalFilename());
+        }
     }
 }

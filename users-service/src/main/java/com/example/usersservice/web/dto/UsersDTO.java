@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+import static java.util.Objects.nonNull;
+
 @NoArgsConstructor @AllArgsConstructor
 @Getter
 public class UsersDTO {
@@ -28,11 +30,17 @@ public class UsersDTO {
     private String password;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDate creation;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private String image;
 
     public UsersDTO(Users users){
         this.id = users.getId();
         this.name = users.getName();
         this.identifier = users.getIdentifier();
         this.creation = users.getCreation();
+        // hardcoded my bad
+        if(nonNull(users.getImage())) {
+            this.image = "http://localhost:9000/media/" + users.getImage();
+        }
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -61,6 +62,15 @@ public class UsersController {
         if(usersOptional.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         // update data
         Users response = usersService.updateUser(usersDTO, usersOptional.get());
+        return ResponseEntity.ok(new UsersDTO(response));
+    }
+
+    @PutMapping("/users/profile-image")
+    public ResponseEntity<UsersDTO> updateUserProfileImage (@RequestPart MultipartFile image) {
+        String identifier = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<Users> usersOptional = usersService.getByIdentifier(identifier);
+        if(usersOptional.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        Users response = usersService.updateUserImage(usersOptional.get(), image);
         return ResponseEntity.ok(new UsersDTO(response));
     }
 }
